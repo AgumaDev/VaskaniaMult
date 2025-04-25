@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Caliz Hostia
+  - Cenizas
+  - Ouija
+  - Vela
+  - Caliz Vino
+  - Cross
+  - Palo Santo
+  - Key
+  - Rosary
+  - Oil Lamp
+  - DANGER
+  - MainArea
+  - CenizasDecal
+  - MainAreaWalls
+  - Encendedor
+  - Incienso
+  - Sal
+  - AguaBendita
+  - Banderin
+  - Cuadro
+  - Campanillas
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
+  - PickUp
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  m_RenderingLayers:
+  - Default

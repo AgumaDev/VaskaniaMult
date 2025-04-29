@@ -13,22 +13,23 @@ public class PickUpController : NetworkBehaviour
     [SerializeField] private Transform pickUpPoint;
     [SerializeField] private LayerMask pickUpLayer;
 
-    [SerializeField] public NetworkObject currentPickObject;
+    [SerializeField] public NetworkObject currentPickedObject;
     [SerializeField] public bool pickedObject;
 
     [Header("Picked Objects Logic")]
-    
     [SerializeField] private FlashLightLogic flashLightLogic;
     [SerializeField] private OuijaLogic ouijaLogic;
-    [SerializeField] private ProtectionLogic protectionLogic1;
-    [SerializeField] private ProtectionLogic protectionLogic2;
+
+    [SerializeField] private ProtectionLogic crossLogic;
+    [SerializeField] private ProtectionLogic rosaryLogic;
     [SerializeField] private PaloSantoLogic paloSantoLogic;
     [SerializeField] private KeysLogic keysLogic;
     [SerializeField] private EncendedorLogic encendedorLogic;
     [SerializeField] private CenizasLogic cenizasLogic;
+    public PlayerHealth playerHealth;
 
     [SerializeField] public Renderer calizHostia, calizVino, cenizas, oilLamp, ouija, encendedor, cross, rosary, incienso, key, sal, aguaBendita, banderin, campanilla, cuadro, paloSanto;
-
+    [SerializeField] public bool isProtected;
     void Update()
     {
         if (!IsOwner) return;
@@ -87,12 +88,16 @@ public class PickUpController : NetworkBehaviour
         if (obj.gameObject.CompareTag("Cross"))
         {
             cross.enabled = true; 
-            protectionLogic1.enabled = true;
+            crossLogic.enabled = true;      
+            isProtected = true;
+            playerHealth.protectionLogic = crossLogic;
         }
         if (obj.gameObject.CompareTag("Rosary"))
         {
             rosary.enabled = true; 
-            protectionLogic2.enabled = true;
+            rosaryLogic.enabled = true;
+            isProtected = true;
+            playerHealth.protectionLogic = rosaryLogic;
         }
         if (obj.gameObject.CompareTag("Incienso"))
         {
@@ -150,17 +155,17 @@ public class PickUpController : NetworkBehaviour
         pickedObject = true;
 
         if (IsOwner)
-            currentPickObject = obj;
+            currentPickedObject = obj;
     }
 
     private void DropObject()
     {
-        if (currentPickObject == null) return;
+        if (currentPickedObject == null) return;
         
         Vector3 dropPosition = pickUpPoint.position;
-        RequestDropServerRpc(currentPickObject.NetworkObjectId, dropPosition);
+        RequestDropServerRpc(currentPickedObject.NetworkObjectId, dropPosition);
         
-        currentPickObject = null;
+        currentPickedObject = null;
     }
 
     [Rpc(SendTo.Server)]
@@ -218,11 +223,13 @@ public class PickUpController : NetworkBehaviour
         calizVino.enabled = false;
         
         cross.enabled = false;
-        protectionLogic1.enabled = false;
+        crossLogic.enabled = false;
+        isProtected = false;
         
         rosary.enabled = false;
-        protectionLogic2.enabled = false;
-        
+        rosaryLogic.enabled = false;
+        isProtected = false;
+
         paloSanto.enabled = false;
         
         cuadro.enabled = false;
@@ -247,7 +254,7 @@ public class PickUpController : NetworkBehaviour
 
         if (IsOwner)
         {
-            currentPickObject = null;
+            currentPickedObject = null;
         }
     }
 }

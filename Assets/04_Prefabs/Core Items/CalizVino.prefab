@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 2115702316630675653}
   - component: {fileID: 7253524022492081847}
   - component: {fileID: 1487757890747105666}
-  - component: {fileID: 5884611845855210074}
+  - component: {fileID: 732062968705812335}
   - component: {fileID: -7951926330312939630}
   - component: {fileID: -8260165954814124409}
   - component: {fileID: 8693911656547659102}
   - component: {fileID: -316100220817911915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CalizVino
   m_TagString: Caliz Vino
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5884611845855210074
+--- !u!65 &732062968705812335
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,8 +138,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2887268, y: 2.4358826, z: 1.2664268}
-  m_Center: {x: 0.000015258789, y: 0.07098669, z: -0.000000029802322}
+  m_Size: {x: 1.2, y: 2.4358826, z: 1.2664268}
+  m_Center: {x: 0, y: 0.07, z: 0}
 --- !u!114 &-7951926330312939630
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    [SerializeField] ProtectionLogic protectionLogic;
+    [SerializeField] public ProtectionLogic protectionLogic;
     [SerializeField] PickUpController pickUpController;
     private void Update()
     {
@@ -11,15 +11,10 @@ public class PlayerHealth : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        // if (!pickUpController.crossBool && !pickUpController.rosaryBool && other.CompareTag("DANGER"))
-        //     DespawnPlayerRPC();
-        // else if (pickUpController.crossBool || pickUpController.rosaryBool && other.CompareTag("DANGER"))
-        //     protectionLogic.hasBeenUsed = true;
-
-        if (other.CompareTag("DANGER"))
-        {
-           DespawnPlayerRPC();
-        }
+        if (!pickUpController.isProtected && other.CompareTag("DANGER"))
+            DespawnPlayerRPC();
+        else if (pickUpController.isProtected && other.CompareTag("DANGER"))
+            protectionLogic.hasBeenUsed = true;
     }
     
     [Rpc(SendTo.Server)]

@@ -17,7 +17,7 @@ public class ProtectionLogic : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if (hasBeenUsed)
+        if (hasBeenUsed && pickUpController.isProtected)
         {
             OnProtectionRPC();
         }
@@ -28,8 +28,9 @@ public class ProtectionLogic : NetworkBehaviour
     {
         pickUpController.rosary.enabled = false;
         pickUpController.cross.enabled = false;
+        pickUpController.isProtected = false;
         
-        pickUpController.currentPickObject = null;
+        pickUpController.currentPickedObject = null;
         pickUpController.pickedObject = false;
     }
 }

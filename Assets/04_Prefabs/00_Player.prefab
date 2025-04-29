@@ -6101,10 +6101,10 @@ Transform:
   - {fileID: 2839856487281857204}
   - {fileID: 5138121513053845849}
   - {fileID: 431919706918517325}
+  - {fileID: 7457972936164517397}
   - {fileID: 199661335541628332}
   - {fileID: 770905425891571355}
   - {fileID: 8098392091141159166}
-  - {fileID: 7457972936164517397}
   m_Father: {fileID: 5715097406100775773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &143510339052955349
@@ -6570,7 +6570,7 @@ GameObject:
   - component: {fileID: 1184366624638526292}
   - component: {fileID: 3229473042316535407}
   m_Layer: 0
-  m_Name: Rosario
+  m_Name: Rosary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7319,16 +7319,17 @@ MonoBehaviour:
   pickUpLayer:
     serializedVersion: 2
     m_Bits: 64
-  currentPickObject: {fileID: 0}
+  currentPickedObject: {fileID: 0}
   pickedObject: 0
   flashLightLogic: {fileID: 1895548128587078564}
   ouijaLogic: {fileID: 5323526705221984381}
-  protectionLogic1: {fileID: 905729622632026667}
-  protectionLogic2: {fileID: 3229473042316535407}
+  crossLogic: {fileID: 905729622632026667}
+  rosaryLogic: {fileID: 3229473042316535407}
   paloSantoLogic: {fileID: 405948123324115862}
   keysLogic: {fileID: 971848402714340524}
   encendedorLogic: {fileID: 8328917259954540744}
   cenizasLogic: {fileID: 742202354407794902}
+  playerHealth: {fileID: 5480400596728400651}
   calizHostia: {fileID: 3076656306832518232}
   calizVino: {fileID: 2503533197047945571}
   cenizas: {fileID: 2501425594046451449}
@@ -7345,6 +7346,7 @@ MonoBehaviour:
   campanilla: {fileID: 8408973309561056909}
   cuadro: {fileID: 1407916264144715644}
   paloSanto: {fileID: 9104202646420529340}
+  isProtected: 0
 --- !u!114 &5480400596728400651
 MonoBehaviour:
   m_ObjectHideFlags: 0

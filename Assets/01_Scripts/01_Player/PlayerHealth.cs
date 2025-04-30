@@ -1,22 +1,28 @@
 using Unity.Netcode;
 using UnityEngine;
-
 public class PlayerHealth : NetworkBehaviour
 {
     [SerializeField] public ProtectionLogic protectionLogic;
-    [SerializeField] PickUpController pickUpController;
-    private void Update()
-    {
-        if (!IsOwner) return; 
-    }
+    [SerializeField] private PickUpController pickUpController;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!pickUpController.isProtected && other.CompareTag("DANGER"))
-            DespawnPlayerRPC();
-        else if (pickUpController.isProtected && other.CompareTag("DANGER"))
-            protectionLogic.hasBeenUsed = true;
+        if (!IsOwner) return;
+
+        if (other.CompareTag("DANGER"))
+            TryHandleDangerServerRpc();
     }
     
+    [Rpc(SendTo.Server)]
+    private void TryHandleDangerServerRpc()
+    {
+        if (pickUpController == null || protectionLogic == null) return;
+
+        if (pickUpController.isProtected)
+            protectionLogic.OnProtectionServer();
+        else
+            DespawnPlayerRPC();
+    }
     [Rpc(SendTo.Server)]
     private void DespawnPlayerRPC()
     {

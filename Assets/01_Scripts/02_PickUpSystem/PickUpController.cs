@@ -1,9 +1,6 @@
-using System.Runtime;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
-using UnityEngine.Serialization;
-
 public class PickUpController : NetworkBehaviour
 {
     [Header("PickUp Logic")]
@@ -23,6 +20,7 @@ public class PickUpController : NetworkBehaviour
     [SerializeField] private ProtectionLogic crossLogic;
     [SerializeField] private ProtectionLogic rosaryLogic;
     [SerializeField] private PaloSantoLogic paloSantoLogic;
+    [SerializeField] private IncenseLogic incenseLogic;
     [SerializeField] private KeysLogic keysLogic;
     [SerializeField] private EncendedorLogic encendedorLogic;
     [SerializeField] private CenizasLogic cenizasLogic;
@@ -63,7 +61,7 @@ public class PickUpController : NetworkBehaviour
         if (!NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(objectId, out var obj)) return;
         UpdateClientsOnPickUpRpc(objectId);
     }
-
+    
     [Rpc(SendTo.Everyone)]
     private void UpdateClientsOnPickUpRpc(ulong objectId)
     {
@@ -72,9 +70,7 @@ public class PickUpController : NetworkBehaviour
         obj.GetComponent<Renderer>().enabled = false;
         obj.GetComponent<NetworkTransform>().InLocalSpace = false;
         obj.GetComponent<Collider>().enabled = false;
-
-        //esto se podria hacer mas facil quiza con un switch, que dependiendo del tag del objeto cambie el state de un enum,
-        //pero la logica seria esta
+        
         if (obj.gameObject.CompareTag("Oil Lamp"))
         {
             oilLamp.enabled = true;
@@ -102,7 +98,7 @@ public class PickUpController : NetworkBehaviour
         if (obj.gameObject.CompareTag("Incienso"))
         {
             incienso.enabled = true; 
-            paloSantoLogic.enabled = true;
+            incenseLogic.enabled = true;
         }
         if (obj.gameObject.CompareTag("Key"))
         {
@@ -138,6 +134,7 @@ public class PickUpController : NetworkBehaviour
         if (obj.gameObject.CompareTag("Palo Santo"))
         {
             paloSanto.enabled = true;
+            paloSantoLogic.enabled = true;
         }
         if (obj.gameObject.CompareTag("AguaBendita"))
         {
@@ -207,13 +204,13 @@ public class PickUpController : NetworkBehaviour
         cenizas.enabled = false;
         cenizasLogic.enabled = false;
         
-        if (paloSantoLogic != null && !pickedObject)
+        if (incenseLogic != null && !pickedObject)
         {
-            paloSantoLogic.particles.SetActive(false);
-            paloSantoLogic.isEnabled = false;
+            incenseLogic.particles.SetActive(false);
+            incenseLogic.isEnabled = false;
         }
         incienso.enabled = false;
-        paloSantoLogic.enabled = false;
+        incenseLogic.enabled = false;
 
         key.enabled = false;
         keysLogic.enabled = false;
@@ -231,6 +228,7 @@ public class PickUpController : NetworkBehaviour
         isProtected = false;
 
         paloSanto.enabled = false;
+        paloSantoLogic.enabled = false;
         
         cuadro.enabled = false;
         

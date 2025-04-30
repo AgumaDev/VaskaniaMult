@@ -294,6 +294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5957464b8fa5c054194638b381e679f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerCameraObject: {fileID: 2312887120965283077}
+  raycastStartPoint: {fileID: 8475483101724147989}
+  pickUpController: {fileID: 4702340666711139427}
+  anim: {fileID: 8177569863474744647}
 --- !u!1 &1808475759981368021
 GameObject:
   m_ObjectHideFlags: 0
@@ -6281,9 +6286,9 @@ GameObject:
   - component: {fileID: 2884448141647721021}
   - component: {fileID: 45880264746456718}
   - component: {fileID: 3751774146182522711}
-  - component: {fileID: 405948123324115862}
+  - component: {fileID: 3596360445152798085}
   m_Layer: 0
-  m_Name: Incienso
+  m_Name: Incense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6380,7 +6385,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &405948123324115862
+--- !u!114 &3596360445152798085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6389,7 +6394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6262208887116317745}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6883d46f2c98d44488c559ebc2d4f141, type: 3}
+  m_Script: {fileID: 11500000, guid: bcdc141ae9e112e4289482e5042e36fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -6524,7 +6529,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   anim: {fileID: 7091941865993723960}
   pickUpController: {fileID: 4702340666711139427}
-  hasBeenUsed: 0
 --- !u!1 &6605255614946276843
 GameObject:
   m_ObjectHideFlags: 0
@@ -6681,7 +6685,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   anim: {fileID: 1184366624638526292}
   pickUpController: {fileID: 4702340666711139427}
-  hasBeenUsed: 0
 --- !u!1 &7143752967810780210
 GameObject:
   m_ObjectHideFlags: 0
@@ -7075,6 +7078,7 @@ GameObject:
   - component: {fileID: 8098392091141159166}
   - component: {fileID: 373381998648078545}
   - component: {fileID: 9104202646420529340}
+  - component: {fileID: 4284748546703496420}
   m_Layer: 0
   m_Name: PaloSanto
   m_TagString: Untagged
@@ -7150,6 +7154,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4284748546703496420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7856891319844912087}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6883d46f2c98d44488c559ebc2d4f141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &8229707870175547847
 GameObject:
   m_ObjectHideFlags: 0
@@ -7325,7 +7342,8 @@ MonoBehaviour:
   ouijaLogic: {fileID: 5323526705221984381}
   crossLogic: {fileID: 905729622632026667}
   rosaryLogic: {fileID: 3229473042316535407}
-  paloSantoLogic: {fileID: 405948123324115862}
+  paloSantoLogic: {fileID: 4284748546703496420}
+  incenseLogic: {fileID: 3596360445152798085}
   keysLogic: {fileID: 971848402714340524}
   encendedorLogic: {fileID: 8328917259954540744}
   cenizasLogic: {fileID: 742202354407794902}

@@ -66,5 +66,15 @@ public class MainMenuHandler : MonoBehaviour
     { 
     
     }
+    
+    public void OnHover()
+    {
+        
+    }
+
+    public void OffHover()
+    {
+        
+    }
 
 }

@@ -1,9 +1,6 @@
-using System.Runtime;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
-using UnityEngine.Serialization;
-
 public class PickUpController : NetworkBehaviour
 {
     [Header("PickUp Logic")]
@@ -13,22 +10,24 @@ public class PickUpController : NetworkBehaviour
     [SerializeField] private Transform pickUpPoint;
     [SerializeField] private LayerMask pickUpLayer;
 
-    [SerializeField] public NetworkObject currentPickObject;
+    [SerializeField] public NetworkObject currentPickedObject;
     [SerializeField] public bool pickedObject;
 
     [Header("Picked Objects Logic")]
-    
     [SerializeField] private FlashLightLogic flashLightLogic;
     [SerializeField] private OuijaLogic ouijaLogic;
-    [SerializeField] private ProtectionLogic protectionLogic1;
-    [SerializeField] private ProtectionLogic protectionLogic2;
+
+    [SerializeField] private ProtectionLogic crossLogic;
+    [SerializeField] private ProtectionLogic rosaryLogic;
     [SerializeField] private PaloSantoLogic paloSantoLogic;
+    [SerializeField] private IncenseLogic incenseLogic;
     [SerializeField] private KeysLogic keysLogic;
     [SerializeField] private EncendedorLogic encendedorLogic;
     [SerializeField] private CenizasLogic cenizasLogic;
+    public PlayerHealth playerHealth;
 
     [SerializeField] public Renderer calizHostia, calizVino, cenizas, oilLamp, ouija, encendedor, cross, rosary, incienso, key, sal, aguaBendita, banderin, campanilla, cuadro, paloSanto;
-
+    [SerializeField] public bool isProtected;
     void Update()
     {
         if (!IsOwner) return;
@@ -62,7 +61,7 @@ public class PickUpController : NetworkBehaviour
         if (!NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(objectId, out var obj)) return;
         UpdateClientsOnPickUpRpc(objectId);
     }
-
+    
     [Rpc(SendTo.Everyone)]
     private void UpdateClientsOnPickUpRpc(ulong objectId)
     {
@@ -71,9 +70,7 @@ public class PickUpController : NetworkBehaviour
         obj.GetComponent<Renderer>().enabled = false;
         obj.GetComponent<NetworkTransform>().InLocalSpace = false;
         obj.GetComponent<Collider>().enabled = false;
-
-        //esto se podria hacer mas facil quiza con un switch, que dependiendo del tag del objeto cambie el state de un enum,
-        //pero la logica seria esta
+        
         if (obj.gameObject.CompareTag("Oil Lamp"))
         {
             oilLamp.enabled = true;
@@ -87,17 +84,21 @@ public class PickUpController : NetworkBehaviour
         if (obj.gameObject.CompareTag("Cross"))
         {
             cross.enabled = true; 
-            protectionLogic1.enabled = true;
+            crossLogic.enabled = true;      
+            isProtected = true;
+            playerHealth.protectionLogic = crossLogic;
         }
         if (obj.gameObject.CompareTag("Rosary"))
         {
             rosary.enabled = true; 
-            protectionLogic2.enabled = true;
+            rosaryLogic.enabled = true;
+            isProtected = true;
+            playerHealth.protectionLogic = rosaryLogic;
         }
         if (obj.gameObject.CompareTag("Incienso"))
         {
             incienso.enabled = true; 
-            paloSantoLogic.enabled = true;
+            incenseLogic.enabled = true;
         }
         if (obj.gameObject.CompareTag("Key"))
         {
@@ -133,6 +134,7 @@ public class PickUpController : NetworkBehaviour
         if (obj.gameObject.CompareTag("Palo Santo"))
         {
             paloSanto.enabled = true;
+            paloSantoLogic.enabled = true;
         }
         if (obj.gameObject.CompareTag("AguaBendita"))
         {
@@ -150,17 +152,17 @@ public class PickUpController : NetworkBehaviour
         pickedObject = true;
 
         if (IsOwner)
-            currentPickObject = obj;
+            currentPickedObject = obj;
     }
 
     private void DropObject()
     {
-        if (currentPickObject == null) return;
+        if (currentPickedObject == null) return;
         
         Vector3 dropPosition = pickUpPoint.position;
-        RequestDropServerRpc(currentPickObject.NetworkObjectId, dropPosition);
+        RequestDropServerRpc(currentPickedObject.NetworkObjectId, dropPosition);
         
-        currentPickObject = null;
+        currentPickedObject = null;
     }
 
     [Rpc(SendTo.Server)]
@@ -202,13 +204,13 @@ public class PickUpController : NetworkBehaviour
         cenizas.enabled = false;
         cenizasLogic.enabled = false;
         
-        if (paloSantoLogic != null && !pickedObject)
+        if (incenseLogic != null && !pickedObject)
         {
-            paloSantoLogic.particles.SetActive(false);
-            paloSantoLogic.isEnabled = false;
+            incenseLogic.particles.SetActive(false);
+            incenseLogic.isEnabled = false;
         }
         incienso.enabled = false;
-        paloSantoLogic.enabled = false;
+        incenseLogic.enabled = false;
 
         key.enabled = false;
         keysLogic.enabled = false;
@@ -218,12 +220,15 @@ public class PickUpController : NetworkBehaviour
         calizVino.enabled = false;
         
         cross.enabled = false;
-        protectionLogic1.enabled = false;
+        crossLogic.enabled = false;
+        isProtected = false;
         
         rosary.enabled = false;
-        protectionLogic2.enabled = false;
-        
+        rosaryLogic.enabled = false;
+        isProtected = false;
+
         paloSanto.enabled = false;
+        paloSantoLogic.enabled = false;
         
         cuadro.enabled = false;
         
@@ -247,7 +252,7 @@ public class PickUpController : NetworkBehaviour
 
         if (IsOwner)
         {
-            currentPickObject = null;
+            currentPickedObject = null;
         }
     }
 }

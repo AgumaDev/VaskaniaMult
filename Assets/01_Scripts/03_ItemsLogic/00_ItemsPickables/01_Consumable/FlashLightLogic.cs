@@ -13,7 +13,7 @@ public class FlashLightLogic : NetworkBehaviour
     {
         if (!IsOwner) return;
         
-        if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             ToggleFlashlightServerRpc(!isEnabled);
     }
     

@@ -1,6 +1,7 @@
-using UnityEngine;
 using Unity.Netcode;
-public class PaloSantoLogic : NetworkBehaviour
+using UnityEngine;
+
+public class IncenseLogic : NetworkBehaviour
 {
     [SerializeField] Animator anim;
     [SerializeField] public bool isEnabled;
@@ -10,7 +11,7 @@ public class PaloSantoLogic : NetworkBehaviour
     [SerializeField] public PlayerController playerController;
     private void OnEnable()
     {
-       // anim.SetTrigger("Palo Santo");
+        // anim.SetTrigger("Palo Santo");
     }
     private void Update()
     {

@@ -7167,6 +7167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  roomSystem: {fileID: 0}
+  pickUpController: {fileID: 4702340666711139427}
 --- !u!1 &8229707870175547847
 GameObject:
   m_ObjectHideFlags: 0

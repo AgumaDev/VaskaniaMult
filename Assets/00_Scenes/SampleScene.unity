@@ -1551,6 +1551,7 @@ MonoBehaviour:
   baseEventChance: 10
   bonusEventChance: 0
   bonusEventChanceMultiplier: 10
+  inRoom: 0
   roomEvents:
   - {fileID: 493065049}
 --- !u!1 &538563282 stripped

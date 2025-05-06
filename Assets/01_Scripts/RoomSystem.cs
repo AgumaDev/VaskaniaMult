@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 public class RoomSystem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     [Header("## ROOM SYSTEM ##")]
     [Space(5)]
 
@@ -23,6 +20,7 @@ public class RoomSystem : MonoBehaviour
 
     [Header("OTHER")]
     int playerInRoom;
+    [SerializeField] public bool inRoom;
 
     public List<RoomEvent> roomEvents = new();
 
@@ -86,15 +84,16 @@ public class RoomSystem : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         { 
             playerInRoom++;
+            inRoom = true;
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
 
         if (other.gameObject.CompareTag("Player"))
         {
             playerInRoom--;
+            inRoom = false;
         }
     }
 }

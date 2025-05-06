@@ -9,7 +9,7 @@ public class PaloSantoLogic : NetworkBehaviour
 
     private void OnEnable()
     {
-        roomSystem = FindObjectOfType<RoomSystem>();
+        roomSystem = FindFirstObjectByType<RoomSystem>();
     }
     private void Update()
     {

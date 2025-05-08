@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine;
 public class ProtectionLogic : NetworkBehaviour
 {
-    [SerializeField] private Animator anim;
-    [SerializeField] public Material dissolveMat;
+    [SerializeField] private Animator anim; 
     [SerializeField] private PickUpController pickUpController;
 
     [SerializeField] private DissolveController dissolveController;

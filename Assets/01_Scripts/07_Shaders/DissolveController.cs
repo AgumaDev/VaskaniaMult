@@ -1,37 +1,38 @@
 using System.Collections;
+using UnityEngine.VFX;
 using UnityEngine;
-
 public class DissolveController : MonoBehaviour
 {
     public Material dissolveMat;
-
+    public VisualEffect dissolveVFXGraph;
     private void Start()
     {
-        dissolveMat.SetFloat("_DissolveAmount", 0f);
         dissolveMat = GetComponent<MeshRenderer>().materials[0];
+        dissolveMat.SetFloat("_DissolveAmount", 0f);
     }
-
     public IEnumerator DissolveCo(float duration)
     {
-        float elapsed = 0f; // tiempo acumulado desde que empezó
-        float startValue = dissolveMat.GetFloat("_DissolveAmount"); // valor inicial
-        float targetValue = 1f; // valor final que queremos alcanzar
+        float elapsed = 0f;
+        float startValue = dissolveMat.GetFloat("_DissolveAmount");
+        float targetValue = 1f;
 
+        if (dissolveVFXGraph != null)
+            dissolveVFXGraph.Play();
+        
         while (elapsed < duration)
         {
-            elapsed += Time.deltaTime; // aumentamos el tiempo según lo que pasa por frame
+            elapsed += Time.deltaTime; // aumentamos el tiempo segï¿½n lo que pasa por frame
 
-            // Interpolamos entre el valor inicial y final según cuánto tiempo ha pasado
+            // Interpolamos entre el valor inicial y final segï¿½n cuï¿½nto tiempo ha pasado
             float newValue = Mathf.Lerp(startValue, targetValue, elapsed / duration);
 
             // Asignamos ese nuevo valor al shader
             dissolveMat.SetFloat("_DissolveAmount", newValue);
-
+            
             // Esperamos al siguiente frame antes de continuar
             yield return null;
         }
-
-        // Aseguramos que el valor final sea exactamente 1 (por si el bucle no llegó exacto)
-        dissolveMat.SetFloat("_DissolveAmount", targetValue);
+            // Aseguramos que el valor final sea exactamente 1 (por si el bucle no llegï¿½ exacto)
+            dissolveMat.SetFloat("_DissolveAmount", targetValue);   
     }
 }

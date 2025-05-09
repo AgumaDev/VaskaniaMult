@@ -59,9 +59,9 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _Cull: 2
-    - _DissolveAmount: 0
-    - _DissolveScale: 40
-    - _DissolveWith: 0.02
+    - _DissolveAmount: 0.2
+    - _DissolveScale: 30
+    - _DissolveWith: 0.05
     - _DstBlend: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -73,6 +73,6 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _DissolveColor: {r: 1, g: 0.14622638, b: 0.14622638, a: 0}
+    - _DissolveColor: {r: 1, g: 0.6018832, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

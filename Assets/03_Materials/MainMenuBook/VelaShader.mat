@@ -7,25 +7,24 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OutlineMenuBook
-  m_Shader: {fileID: -6465566751694194690, guid: cc3a5b471db56ef4ca6b94e7eeccce83, type: 3}
+  m_Name: VelaShader
+  m_Shader: {fileID: -6465566751694194690, guid: c3db905214989dc4fb28bc87937cb855, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_52bd82ff1a2a4c83944a540e3a13ec5f_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 455b322a381fdbd44aeb89b81486ff06, type: 3}
+    - _SampleTexture2D_0fd9a3ee11d34f9fb96bc92fb144110a_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fa964378469277746ab4750088cab5a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,17 +41,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _Scale: 0.9999965
+    - _Float: 1
+    - _TilingTIme: 3.67
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 80.09, g: 1, b: 0, a: 0}
-    - _Vector2: {r: 1, g: 1, b: 0, a: 0}
+    - _Emission: {r: 29.508848, g: 13.470908, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &1240417559161780141
+--- !u!114 &7571402713988546965
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

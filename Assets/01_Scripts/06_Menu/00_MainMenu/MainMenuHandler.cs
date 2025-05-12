@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 

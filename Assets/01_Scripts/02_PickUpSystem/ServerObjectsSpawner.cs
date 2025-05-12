@@ -57,9 +57,7 @@ public class ServerObjectsSpawner : NetworkBehaviour
     void SpawnKeyItems()
     {
         for (int i = 0; i < coreItemCount; i++)
-        {
-            print("key items spawned");
-            
+        {            
             int coreItemIndex = Random.Range(0, coreItems.Count);
             GameObject selectedItem = coreItems[coreItemIndex];
             coreItems.RemoveAt(coreItemIndex); // Evita repetir
@@ -78,13 +76,11 @@ public class ServerObjectsSpawner : NetworkBehaviour
     }
     public void SpawnVelas()
     {
-        print("started candles spawned");
         for (int j = 0; j < selectedCoreItems.Count; j++)
         {
             if (selectedCoreItems[j].transform.CompareTag("Encendedor"))
             {
                 candleSpawner.SpawnCandles();
-                print("candles succesfully spawned");
             }
         }
     }

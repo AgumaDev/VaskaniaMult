@@ -6,10 +6,10 @@ public class PaloSantoLogic : NetworkBehaviour
     [SerializeField] public RoomSystem roomSystem;
     [SerializeField] public PickUpController pickUpController;
 
-
+    [SerializeField] private DissolveController dissolveController;
     private void OnEnable()
     {
-        roomSystem = FindObjectOfType<RoomSystem>();
+        roomSystem = FindFirstObjectByType<RoomSystem>();
     }
     private void Update()
     {
@@ -38,9 +38,12 @@ public class PaloSantoLogic : NetworkBehaviour
         
         yield return new WaitForSeconds(5);
         
+        yield return StartCoroutine(dissolveController.DissolveCo(2f));
         DisablePaloSantoRpc();
+        dissolveController.dissolveMat.SetFloat("_DissolveAmount", 0f);
         Debug.Log("Protection ended");
     }
+
     [Rpc(SendTo.Everyone)]
     private void DisablePaloSantoRpc()
     {

@@ -78,7 +78,7 @@ public class ServerObjectsSpawner : NetworkBehaviour
     {
         for (int j = 0; j < selectedCoreItems.Count; j++)
         {
-            if (selectedCoreItems[j].transform.CompareTag("Encendedor"))
+            if (selectedCoreItems[j].transform.CompareTag("Core/Lighter"))
             {
                 candleSpawner.SpawnCandles();
             }

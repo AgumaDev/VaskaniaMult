@@ -2,6 +2,8 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Netcode.Components;
+using UnityEngine.Serialization;
+
 public class PickUpController : NetworkBehaviour
 {
     [Header("PickUp Logic")]
@@ -25,9 +27,7 @@ public class PickUpController : NetworkBehaviour
     [SerializeField] private CenizasLogic cenizasLogic;
     public PlayerHealth playerHealth;
 
-    [SerializeField] public Renderer calizHostia, calizVino, liquidVino, cenizas, oilLamp, ouija,
-        encendedor, cross, rosary, incienso, key, sal, aguaBendita, banderin, campanilla, cuadro, paloSanto;
-
+    [SerializeField] private ObjectsInHand objectsInHand;
     [SerializeField] public bool isProtected;
 
     private Dictionary<string, System.Action> pickUpActions;
@@ -37,54 +37,56 @@ public class PickUpController : NetworkBehaviour
     {
         pickUpActions = new Dictionary<string, System.Action>
         {
-            { "Caliz Vino", () => { calizVino.enabled = true; liquidVino.enabled = true; } },
-            { "Oil Lamp", () => { oilLamp.enabled = true; flashLightLogic.enabled = true; } },
-            { "Ouija", () => { ouija.enabled = true; ouijaLogic.enabled = true; } },
-            { "Cross", () => { cross.enabled = true; crossLogic.enabled = true; isProtected = true; playerHealth.protectionLogic = crossLogic; }},
-            { "Rosary", () => { rosary.enabled = true; rosaryLogic.enabled = true; isProtected = true; playerHealth.protectionLogic = rosaryLogic; }},
-            { "Incienso", () => { incienso.enabled = true; incenseLogic.enabled = true; } },
-            { "Key", () => { key.enabled = true; keysLogic.enabled = true; } },
-            { "Encendedor", () => { encendedor.enabled = true; encendedorLogic.enabled = true; } },
-            { "Cenizas", () => { cenizas.enabled = true; cenizasLogic.enabled = true; } },
-            { "Campanillas", () => { campanilla.enabled = true; } },
-            { "Cuadro", () => { cuadro.enabled = true; } },
-            { "Banderin", () => { banderin.enabled = true; } },
-            { "Sal", () => { sal.enabled = true; } },
-            { "Palo Santo", () => { paloSanto.enabled = true; paloSantoLogic.enabled = true; } },
-            { "AguaBendita", () => { aguaBendita.enabled = true; } },
-            { "Caliz Hostia", () => { calizHostia.enabled = true; } }
+            { "Core/Chalice Wine", () => { objectsInHand.chaliceWine.enabled = true; objectsInHand.wineLiquid.enabled = true; } },
+            { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = true; } },
+            { "Core/Incense", () => { objectsInHand.incense.enabled = true; incenseLogic.enabled = true; } },
+            { "Core/Lighter", () => { objectsInHand.lighter.enabled = true; encendedorLogic.enabled = true; } },
+            { "Core/Ashes", () => { objectsInHand.ashes.enabled = true; cenizasLogic.enabled = true; } },
+            { "Core/Bell", () => { objectsInHand.bell.enabled = true; } },
+            { "Core/Frame Painting", () => { objectsInHand.paintingFrame.enabled = true; } },
+            { "Core/Pennant", () => { objectsInHand.pennant.enabled = true; } },
+            { "Core/Salt", () => { objectsInHand.salt.enabled = true; } },
+            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = true; } },
+        
+            { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = true; paloSantoLogic.enabled = true; } },
+            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = true; flashLightLogic.enabled = true; } },
+            { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = true; ouijaLogic.enabled = true; } },
+            { "Consumable/Cross", () => { objectsInHand.cross.enabled = true; crossLogic.enabled = true; isProtected = true; playerHealth.protectionLogic = crossLogic; }},
+            { "Consumable/Rosary", () => { objectsInHand.rosary.enabled = true; rosaryLogic.enabled = true; isProtected = true; playerHealth.protectionLogic = rosaryLogic; }},
+            { "Consumable/Key", () => { objectsInHand.key.enabled = true; keysLogic.enabled = true; } }
         };
 
         dropActions = new Dictionary<string, System.Action>
         {
-            { "Oil Lamp", () => { oilLamp.enabled = false; flashLightLogic.enabled = false; if (!pickedObject) flashLightLogic.pointLight.SetActive(false); }},
-            { "Ouija", () => { ouija.enabled = false; ouijaLogic.enabled = false; } },
-            { "Encendedor", () => { encendedor.enabled = false; encendedorLogic.enabled = false;
+            { "Core/Lighter", () => { objectsInHand.lighter.enabled = false; encendedorLogic.enabled = false;
                 if (!pickedObject)
                 {
                     encendedorLogic.pointLight.SetActive(false);
                     encendedorLogic.isLighted = false;
                 }
             }},
-            { "Cenizas", () => { cenizas.enabled = false; cenizasLogic.enabled = false; } },
-            { "Incienso", () => { incienso.enabled = false; incenseLogic.enabled = false;
+            { "Core/Ashes", () => { objectsInHand.ashes.enabled = false; cenizasLogic.enabled = false; } },
+            { "Core/Incense", () => { objectsInHand.incense.enabled = false; incenseLogic.enabled = false;
                 if (!pickedObject)
                 {
                     incenseLogic.particles.SetActive(false);
                     incenseLogic.isEnabled = false;
                 }
             }},
-            { "Key", () => { key.enabled = false; keysLogic.enabled = false; } },
-            { "Caliz Vino", () => { calizVino.enabled = false; liquidVino.enabled = false; } },
-            { "Caliz Hostia", () => { calizHostia.enabled = false; } },
-            { "Cross", () => { cross.enabled = false; crossLogic.enabled = false; isProtected = false; }},
-            { "Rosary", () => { rosary.enabled = false; rosaryLogic.enabled = false; isProtected = false; }},
-            { "Palo Santo", () => { paloSanto.enabled = false; paloSantoLogic.enabled = false; } },
-            { "Campanillas", () => { campanilla.enabled = false; } },
-            { "Cuadro", () => { cuadro.enabled = false; } },
-            { "Banderin", () => { banderin.enabled = false; } },
-            { "Sal", () => { sal.enabled = false; } },
-            { "AguaBendita", () => { aguaBendita.enabled = false; } }
+            { "Core/Bell", () => { objectsInHand.bell.enabled = false; } },
+            { "Core/Frame Painting", () => { objectsInHand.paintingFrame.enabled = false; } },
+            { "Core/Pennant", () => { objectsInHand.pennant.enabled = false; } },
+            { "Core/Salt", () => { objectsInHand.salt.enabled = false; } },
+            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = false; } },
+            { "Core/Chalice Wine", () => { objectsInHand.chaliceWine.enabled = false; objectsInHand.wineLiquid.enabled = false; } },
+            { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = false; } },
+            
+            { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = false; paloSantoLogic.enabled = false; } },
+            { "Consumable/Key", () => { objectsInHand.key.enabled = false; keysLogic.enabled = false; } },
+            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = false; flashLightLogic.enabled = false; if (!pickedObject) flashLightLogic.pointLight.SetActive(false); }},
+            { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = false; ouijaLogic.enabled = false; } },
+            { "Consumable/Cross", () => { objectsInHand.cross.enabled = false; crossLogic.enabled = false; isProtected = false; }},
+            { "Consumable/Rosary", () => { objectsInHand.rosary.enabled = false; rosaryLogic.enabled = false; isProtected = false; }}
         };
     }
 
@@ -139,7 +141,6 @@ public class PickUpController : NetworkBehaviour
         if (IsOwner)
             currentPickedObject = obj;
     }
-
     private void DropObject()
     {
         if (currentPickedObject == null) return;

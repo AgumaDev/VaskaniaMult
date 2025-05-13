@@ -4,27 +4,27 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Caliz Hostia
-  - Cenizas
-  - Ouija
   - Vela
-  - Caliz Vino
-  - Cross
-  - Palo Santo
-  - Key
-  - Rosary
-  - Oil Lamp
   - DANGER
   - MainArea
   - CenizasDecal
   - MainAreaWalls
-  - Encendedor
-  - Incienso
-  - Sal
-  - AguaBendita
-  - Banderin
-  - Cuadro
-  - Campanillas
+  - Core/Chalice Ostia
+  - Core/Incense
+  - Core/Bell
+  - Core/Salt
+  - Core/Chalice Wine
+  - Core/Frame Painting
+  - Core/Pennant
+  - Core/Holy Water
+  - Core/Lighter
+  - Core/Ashes
+  - Consumable/Cross
+  - Consumable/Oil Lamp
+  - Consumable/Rosary
+  - Consumable/Key
+  - Consumable/Holy Wood
+  - Consumable/Ouija
   layers:
   - Default
   - TransparentFX

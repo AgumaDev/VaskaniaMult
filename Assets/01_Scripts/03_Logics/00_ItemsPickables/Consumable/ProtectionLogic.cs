@@ -3,11 +3,11 @@ using System.Collections;
 using UnityEngine;
 public class ProtectionLogic : NetworkBehaviour
 {
-    [SerializeField] private Animator anim; 
+    [SerializeField] private Animator anim;
     [SerializeField] private PickUpController pickUpController;
-    [SerializeField] private ObjectsInHand objectsInHand;
-
     [SerializeField] private DissolveController dissolveController;
+
+    [SerializeField] private ObjectsInHand objectsInHand;
     private void OnEnable()
     {
         //anim.SetTrigger("Start");

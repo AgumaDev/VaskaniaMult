@@ -172,7 +172,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &762550033972261299
+--- !u!1 &569662477785200458
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,37 +180,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7985315394656754006}
-  - component: {fileID: 4555269499181793861}
+  - component: {fileID: 4753294802536269337}
+  - component: {fileID: 6986336418957796230}
   m_Layer: 0
-  m_Name: Bloom Volume
+  m_Name: VHS Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7985315394656754006
+--- !u!4 &4753294802536269337
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762550033972261299}
+  m_GameObject: {fileID: 569662477785200458}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.571, y: -0.113, z: -0.267}
-  m_LocalScale: {x: 0.61483, y: 0.83863, z: 0.69489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2754212624536600985}
+  m_Father: {fileID: 5715097406100775773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4555269499181793861
+--- !u!114 &6986336418957796230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762550033972261299}
+  m_GameObject: {fileID: 569662477785200458}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
@@ -220,7 +220,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 6ac99eed93d44384c8aa47668eb96095, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 2e172eac1dfc0b34aaee5230ffdf7a85, type: 2}
 --- !u!1 &1519941222995261834
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519941222995261834}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -894,6 +894,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4753294802536269337}
   - {fileID: 2754212624536600985}
   - {fileID: 8207866229750803630}
   m_Father: {fileID: 8502836723256777851}
@@ -970,7 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  mouseSensitivity: 600
+  mouseSensitivity: 400
   playerTransform: {fileID: 8502836723256777851}
 --- !u!114 &8650438986830786315
 MonoBehaviour:
@@ -1090,7 +1091,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 23.968624, y: 5.215274, z: 0, w: 0}
+      - m_Value: {x: 95.8745, y: 20.861095, z: 0, w: 0}
         m_Name: Color
         m_Overridden: 1
     m_Uint:
@@ -6197,7 +6198,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752270928212044866}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6250,6 +6251,7 @@ MonoBehaviour:
   maxWobble: 0.03
   wobbleSpeed: 2
   recovery: 2
+  clampRotation: 178.9
 --- !u!1 &4157146077212866822
 GameObject:
   m_ObjectHideFlags: 0
@@ -6522,7 +6524,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7985315394656754006}
   - {fileID: 7811579292216310549}
   - {fileID: 5150713864234740304}
   - {fileID: 4249982710566425089}
@@ -6651,7 +6652,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 766.996, y: 166.88878, z: 0, w: 0}
+      - m_Value: {x: 95.8745, y: 20.861097, z: 0, w: 0}
         m_Name: Color
         m_Overridden: 1
     m_Uint:
@@ -7054,7 +7055,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6534151437857087432}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -7129,6 +7130,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   anim: {fileID: 7091941865993723960}
   pickUpController: {fileID: 4702340666711139427}
+  dissolveController: {fileID: 4569438069078849738}
   objectsInHand:
     chaliceOstia: {fileID: 0}
     chaliceWine: {fileID: 0}
@@ -7137,8 +7139,8 @@ MonoBehaviour:
     oilLamp: {fileID: 0}
     ouija: {fileID: 0}
     lighter: {fileID: 0}
-    cross: {fileID: 0}
-    rosary: {fileID: 0}
+    cross: {fileID: 2256776192851995413}
+    rosary: {fileID: 2079863161474327676}
     incense: {fileID: 0}
     key: {fileID: 0}
     salt: {fileID: 0}
@@ -7147,7 +7149,6 @@ MonoBehaviour:
     bell: {fileID: 0}
     paintingFrame: {fileID: 0}
     holyWood: {fileID: 0}
-  dissolveController: {fileID: 4569438069078849738}
 --- !u!114 &4569438069078849738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7320,6 +7321,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   anim: {fileID: 1184366624638526292}
   pickUpController: {fileID: 4702340666711139427}
+  dissolveController: {fileID: 5723654592064334026}
   objectsInHand:
     chaliceOstia: {fileID: 0}
     chaliceWine: {fileID: 0}
@@ -7338,7 +7340,6 @@ MonoBehaviour:
     bell: {fileID: 0}
     paintingFrame: {fileID: 0}
     holyWood: {fileID: 0}
-  dissolveController: {fileID: 5723654592064334026}
 --- !u!114 &5723654592064334026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7599,7 +7600,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 766.996, y: 166.88878, z: 0, w: 0}
+      - m_Value: {x: 95.8745, y: 20.861097, z: 0, w: 0}
         m_Name: Color
         m_Overridden: 1
     m_Uint:
@@ -8104,7 +8105,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

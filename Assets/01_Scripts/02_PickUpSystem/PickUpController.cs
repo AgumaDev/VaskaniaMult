@@ -39,7 +39,7 @@ public class PickUpController : NetworkBehaviour
         {
             { "Core/Chalice Wine", () => { objectsInHand.chaliceWine.enabled = true; objectsInHand.wineLiquid.enabled = true; } },
             { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = true; } },
-            { "Core/Incense", () => { objectsInHand.incense.enabled = true; incenseLogic.enabled = true; } },
+            { "Core/Incense", () => { objectsInHand.incense.enabled = true; incenseLogic.enabled = true; incenseLogic.vfxSmoke.gameObject.SetActive(true); } },
             { "Core/Lighter", () => { objectsInHand.lighter.enabled = true; encendedorLogic.enabled = true; } },
             { "Core/Ashes", () => { objectsInHand.ashes.enabled = true; cenizasLogic.enabled = true; } },
             { "Core/Bell", () => { objectsInHand.bell.enabled = true; } },
@@ -69,7 +69,7 @@ public class PickUpController : NetworkBehaviour
             { "Core/Incense", () => { objectsInHand.incense.enabled = false; incenseLogic.enabled = false;
                 if (!pickedObject)
                 {
-                    incenseLogic.particles.SetActive(false);
+                    incenseLogic.vfxSmoke.gameObject.SetActive(false);
                     incenseLogic.isEnabled = false;
                 }
             }},

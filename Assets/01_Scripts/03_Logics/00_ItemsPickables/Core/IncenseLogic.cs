@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class IncenseLogic : NetworkBehaviour
 {
@@ -7,7 +8,7 @@ public class IncenseLogic : NetworkBehaviour
     [SerializeField] public bool isEnabled;
     [SerializeField] public bool isInArea;
     [SerializeField] public bool hasBeenUsed;
-    [SerializeField] public GameObject particles;
+    [SerializeField] public VisualEffect vfxSmoke;
     [SerializeField] public PlayerController playerController;
     private void OnEnable()
     {
@@ -41,7 +42,10 @@ public class IncenseLogic : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void UsePaloClientRpc(bool turnOn)
     {
-        particles.SetActive(turnOn);
         isEnabled = turnOn;
+        if(isEnabled)
+            vfxSmoke.Play();
+        else
+            vfxSmoke.Stop();
     }
 }

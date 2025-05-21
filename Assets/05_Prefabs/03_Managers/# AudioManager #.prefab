@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7116620324966193921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4411994999849017095}
+  - component: {fileID: 7274452923765978280}
+  m_Layer: 0
+  m_Name: '# AudioManager #'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4411994999849017095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116620324966193921}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7274452923765978280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116620324966193921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024adc046d0f5b64aa276c48d4332ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity:
+  - {fileID: 0}
+  currentPhrase: []
+  allPhrases: []
+  salPhrases:
+  - imperat tibi deus exire
+  - 'impera tibi deus exire '
+  - imerat tibi deus exire
+  - imperati tibi deus exire
+  - imperat ti deus exire
+  - imperat tib deus exire
+  - imperat tibi de deus exire
+  - imperat tibi deus exir
+  - imperat tibi deus exirer
+  - emperat tibi deus exire
+  - imperat tibbi deus exire
+  - impera tibi deus exire
+  - imperatu tibi deus exire
+  - imperat tibi deuexire
+  - impert tibi deus exire
+  - imperat tibi deuses exire
+  - imperatt tibi deus exire
+  - impert tibi deuss exire
+  - imperat tibideus exire
+  - impearat tibi deus exire
+  - imperatt tibi deus exira
+  - imperat tibi deus exrie
+  abrirPhrases:
+  - Aperire in nomine lesu
+  - Aperire in nomine Iesu
+  - Aperire in nomine Jesu
+  - Aperire in nomine Iesus
+  - Aperire en nomine Iesu
+  - Aperire in nomine Iesu
+  - Apere in nomine Iesu
+  - Aperire en nomine Iesus
+  - Aperire in nomene Iesu
+  - Aperire in nomen,e Iesus
+  - Aperir en nomine Jesu
+  - Aperir in nomine Iesus
+  - "Aperire in nomine Ies\xFA"
+  - Aperire en nomine Iesu
+  - Aperir in nomene Iesus
+  - "Aperire en nomene Ies\xFA"
+  - Apirire en nomine Iesu
+  - Apirire en nomine Iesus
+  - Aperire in nomene Jesu
+  - Aperire en nonime Iesu
+  - Aperire en nonime Iesus

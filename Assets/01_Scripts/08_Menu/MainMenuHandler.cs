@@ -53,9 +53,10 @@ public class MainMenuHandler : MonoBehaviour
     public CanvasGroup graphicsSettings;
     public CanvasGroup soundSettings;
     public CanvasGroup controlSettings;
+    public CanvasGroup hostMenu;
+    public CanvasGroup clientMenu;
+    public CanvasGroup hostAndClientMenu;
     
-    
-
     void Start()
     {
         layerMask = 1 << layerNumber;
@@ -117,7 +118,6 @@ public class MainMenuHandler : MonoBehaviour
         soundSettings.blocksRaycasts = false;
         controlSettings.blocksRaycasts = false;
     }
-
     public void AudioSettingsButton()
     {
         graphicsActive = false;
@@ -132,7 +132,6 @@ public class MainMenuHandler : MonoBehaviour
         soundSettings.blocksRaycasts = true;
         controlSettings.blocksRaycasts = false;
     }
-
     public void ControlsSettingsButton()
     {
         graphicsActive = false;
@@ -148,12 +147,27 @@ public class MainMenuHandler : MonoBehaviour
         controlSettings.blocksRaycasts = true;
         
     }
-
+    public void ShowHostMenu()
+    {
+        hostMenu.alpha = 1;
+        hostAndClientMenu.alpha = 0;
+    }
+    public void ShowClientMenu()
+    {
+        clientMenu.alpha = 1;
+        hostAndClientMenu.alpha = 0;
+    }
+    public void Return()
+    {
+        hostAndClientMenu.alpha = 1;
+        clientMenu.alpha = 0;
+        hostMenu.alpha = 0;
+        Debug.Log("alo");
+    }
     public void ExitButton()
     { 
     
     }
-
     public void RaycastManager()
     {
         RaycastHit hit;
@@ -205,9 +219,6 @@ public class MainMenuHandler : MonoBehaviour
                 }
             }
         }
-    
-        
         Debug.DrawRay( ray.origin, ray.direction * 1000, Color.red);
     }
-
 }

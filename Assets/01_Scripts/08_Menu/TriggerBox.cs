@@ -63,16 +63,16 @@ public class TriggerBox : MonoBehaviour
                 scaleFactor += Time.deltaTime / 100f;
             
             if(text.alpha < 1)
-            text.alpha += Time.deltaTime * 2;
+                text.alpha += Time.deltaTime * 2;
 
         }
         else
         {
             if (scaleFactor > 1)
-            scaleFactor -= Time.deltaTime / 100f;
+                scaleFactor -= Time.deltaTime / 100f;
             
             if(text.alpha > 0)
-            text.alpha -= Time.deltaTime * 2;
+                text.alpha -= Time.deltaTime * 2;
             
         }
     }

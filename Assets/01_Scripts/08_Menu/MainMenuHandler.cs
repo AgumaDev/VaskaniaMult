@@ -53,9 +53,10 @@ public class MainMenuHandler : MonoBehaviour
     public CanvasGroup graphicsSettings;
     public CanvasGroup soundSettings;
     public CanvasGroup controlSettings;
-    public CanvasGroup hostMenu;
-    public CanvasGroup clientMenu;
-    public CanvasGroup hostAndClientMenu;
+    
+    public GameObject hostMenu;
+    public GameObject clientMenu;
+    public GameObject hostAndClientMenu;
     
     void Start()
     {
@@ -149,19 +150,28 @@ public class MainMenuHandler : MonoBehaviour
     }
     public void ShowHostMenu()
     {
-        hostMenu.alpha = 1;
-        hostAndClientMenu.alpha = 0;
+        hostMenu.SetActive(true);
+
+        clientMenu.SetActive(false);
+        
+        hostAndClientMenu.SetActive(false);
     }
     public void ShowClientMenu()
     {
-        clientMenu.alpha = 1;
-        hostAndClientMenu.alpha = 0;
+        clientMenu.SetActive(true);
+        
+        hostMenu.SetActive(false);
+        
+        hostAndClientMenu.SetActive(false);
     }
     public void Return()
     {
-        hostAndClientMenu.alpha = 1;
-        clientMenu.alpha = 0;
-        hostMenu.alpha = 0;
+        hostAndClientMenu.SetActive(true);
+
+        clientMenu.SetActive(false);
+        
+        hostMenu.SetActive(false);
+
         Debug.Log("alo");
     }
     public void ExitButton()

@@ -8,6 +8,10 @@ public class PlayerNameFollowCamera : MonoBehaviour
 
         Vector3 direction = transform.position - Camera.main.transform.position;
         direction.y = 0f;
-        transform.rotation = Quaternion.LookRotation(direction);
+
+        if (direction.sqrMagnitude > 0.0001f)
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
 }

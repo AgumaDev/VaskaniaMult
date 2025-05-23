@@ -37,7 +37,7 @@ public class EntityLogic : MonoBehaviour
     {
         playerList.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         chaseSpeed = baseSpeed;
-        lifePoints = 3;
+        lifePoints = 1;
         audioRecognition.entity[0] = gameObject;
     }
 

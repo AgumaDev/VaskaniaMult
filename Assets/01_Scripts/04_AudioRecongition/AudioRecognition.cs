@@ -14,28 +14,17 @@ public class AudioRecognition : MonoBehaviour
 
     public List<string> salPhrases = new()
     {
-        "imperat tibi deus exire" , 
-        "impera tibi deus exire ",
-        "imerat tibi deus exire",
-        "imperati tibi deus exire",
-        "imperat ti deus exire",
-        "imperat tib deus exire",
-        "imperat tibi de deus exire",
-        "imperat tibi deus exir",
-        "imperat tibi deus exirer",
-        "emperat tibi deus exire",
-        "imperat tibbi deus exire",
-        "impera tibi deus exire",
-        "imperatu tibi deus exire",
-        "imperat tibi deuexire",
-        "impert tibi deus exire",
-        "imperat tibi deuses exire",
-        "imperatt tibi deus exire",
-        "impert tibi deuss exire",
-        "imperat tibideus exire",
-        "impearat tibi deus exire",
-        "imperatt tibi deus exira",
-        "imperat tibi deus exrie",
+        "Discede creatura tenebrarum",
+        "Disede creatura tenebrarum",
+        "Dicede creatura tenebrarum",
+        "Discede cratura tenebrarum",
+        "Discede creatura tenebarum",
+        "Disede cratura tenebrarum",
+        "Disede cretura tenebrarum",
+        "Disede cratura tenerarum",
+        "Dice de creatura tenebrarum",
+        "Dice de cratura tenebrarum",
+        "Dice de cretura tenebrarum"
     };
 
     #endregion
@@ -113,7 +102,6 @@ public class AudioRecognition : MonoBehaviour
 
     private void Sal()
     {
-        Debug.Log("saliendo lol");
         entity[0].GetComponent<EntityLogic>().hasTeleported = true;
         entity[0].GetComponent<EntityLogic>().lifePoints--;
     }

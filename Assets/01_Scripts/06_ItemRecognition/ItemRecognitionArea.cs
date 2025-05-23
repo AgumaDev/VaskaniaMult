@@ -8,6 +8,8 @@ public class ItemRecognitionArea : MonoBehaviour
     public int coreItemActivated;
 
     public bool candleActivated;
+
+    public GameObject nunEvent;
     
     private void Awake()
     {
@@ -25,6 +27,11 @@ public class ItemRecognitionArea : MonoBehaviour
         {
             coreItemActivated++;
             candleActivated = false;
+        }
+
+        if (coreItemActivated == 3)
+        {
+            nunEvent.SetActive(true);
         }
     }
     public void DecalCounterUp()

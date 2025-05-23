@@ -78,7 +78,7 @@ public class SessionManager : Singleton<SessionManager>
 
             var options = new SessionOptions
             {
-                MaxPlayers = 4,
+                MaxPlayers = 5,
                 IsLocked = false,
                 IsPrivate = false,
                 PlayerProperties = playerProperties

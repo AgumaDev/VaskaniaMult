@@ -16,7 +16,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614857}
-  m_UIPosition: {x: 705, y: -414}
+  m_UIPosition: {x: 708, y: -404}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614862}
   - {fileID: 8926484042661615015}
   - {fileID: 8926484042661614865}
-  m_UIPosition: {x: 704, y: 840}
+  m_UIPosition: {x: 707, y: 850}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -157,11 +157,11 @@ MonoBehaviour:
   m_Name: VFXUI
   m_EditorClassIdentifier: 
   groupInfos:
-  - title: Minimal
+  - title: BRIGHT
     position:
       serializedVersion: 2
-      x: 679
-      y: -473
+      x: 682
+      y: -463
       width: 475
       height: 2113
     contents:
@@ -177,7 +177,7 @@ MonoBehaviour:
     - model: {fileID: 114063133802684794}
       id: 0
       isStickyNote: 0
-  - title: Minimal
+  - title: DARK
     position:
       serializedVersion: 2
       x: 2043
@@ -202,9 +202,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -14
-    y: -473
+    y: -463
     width: 2532
-    height: 2130
+    height: 2120
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661615264}
-  m_UIPosition: {x: 705, y: 477}
+  m_UIPosition: {x: 708, y: 487}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -562,7 +562,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614875}
   - {fileID: 8926484042661614904}
   - {fileID: 8926484042661614922}
-  m_UIPosition: {x: 705, y: -149}
+  m_UIPosition: {x: 708, y: -139}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:

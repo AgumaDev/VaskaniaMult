@@ -1,4 +1,7 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class ItemRecognitionArea : MonoBehaviour
 {
     private static ItemRecognitionArea _instance;
@@ -6,6 +9,8 @@ public class ItemRecognitionArea : MonoBehaviour
 
     private int coreItemNumber;
     public int coreItemActivated;
+    
+    public TextMeshProUGUI coreItemText;
 
     public bool candleActivated;
 
@@ -23,16 +28,27 @@ public class ItemRecognitionArea : MonoBehaviour
     
     void Update()
     {
+        coreItemText.text = coreItemActivated.ToString();
+        
         if (candleActivated == true)
         {
             coreItemActivated++;
             candleActivated = false;
         }
+        
+        if(Input.GetKeyDown(KeyCode.P))
+            SpawnNun();
 
         if (coreItemActivated == 3)
         {
-            nunEvent.SetActive(true);
+            SpawnNun();
         }
+    }
+
+    public void SpawnNun()
+    {
+        nunEvent.SetActive(true);
+
     }
     public void DecalCounterUp()
     {

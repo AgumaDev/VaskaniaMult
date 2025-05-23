@@ -12,7 +12,7 @@ public class AudioRecognition : MonoBehaviour
     public List<string> allPhrases = new List<string>();
     #region SAL
 
-    public List<string> salPhrases = new()
+    public List<string> killPhrases = new()
     {
         "Discede creatura tenebrarum",
         "Disede creatura tenebrarum",
@@ -71,10 +71,10 @@ public class AudioRecognition : MonoBehaviour
         
         wordToAction = new Dictionary<string[], Action>();
 
-        allPhrases.AddRange(salPhrases);
+        allPhrases.AddRange(killPhrases);
         allPhrases.AddRange(abrirPhrases);
         
-        wordToAction.Add(salPhrases.ToArray(), Sal);
+        wordToAction.Add(killPhrases.ToArray(), Sal);
         wordToAction.Add(abrirPhrases.ToArray(), AbrePuerta);
 
         keywordRecognizer = new KeywordRecognizer(allPhrases.ToArray());
@@ -96,7 +96,7 @@ public class AudioRecognition : MonoBehaviour
     }
     private void filterWord(string word)
     {
-        if (salPhrases.Contains(word)) { Sal(); }   
+        if (killPhrases.Contains(word)) { Sal(); }   
         if (abrirPhrases.Contains(word)) { AbrePuerta(); }
     }
 

@@ -31,6 +31,8 @@ public class BookController : MonoBehaviour
     public GameObject izqDer;
     public GameObject derIzq;
 
+    public GameObject pointLight;
+
     public float changeTimer;
 
     private void Start()
@@ -53,6 +55,7 @@ public class BookController : MonoBehaviour
             rightRenderer.enabled = true;
             midLeftRenderer.enabled = true;
             midRightRenderer.enabled = true;
+            pointLight.SetActive(true);
             
             if (changeTimer < 0)
             {
@@ -118,6 +121,7 @@ public class BookController : MonoBehaviour
             rightRenderer.enabled = false;
             midLeftRenderer.enabled = false;
             midRightRenderer.enabled = false;
+            pointLight.SetActive(false);
         }
 
 

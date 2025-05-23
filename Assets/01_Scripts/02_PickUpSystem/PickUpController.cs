@@ -2,8 +2,6 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Netcode.Components;
-using UnityEngine.Serialization;
-
 public class PickUpController : NetworkBehaviour
 {
     [Header("PickUp Logic")]
@@ -46,8 +44,7 @@ public class PickUpController : NetworkBehaviour
             { "Core/Frame Painting", () => { objectsInHand.paintingFrame.enabled = true; } },
             { "Core/Pennant", () => { objectsInHand.pennant.enabled = true; } },
             { "Core/Salt", () => { objectsInHand.salt.enabled = true; } },
-            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = true; } },
-        
+            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = true; objectsInHand.waterLiquid.enabled = true; objectsInHand.corcho.enabled = true; } },
             { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = true; paloSantoLogic.enabled = true; } },
             { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = true; flashLightLogic.enabled = true; } },
             { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = true; ouijaLogic.enabled = true; } },
@@ -71,23 +68,25 @@ public class PickUpController : NetworkBehaviour
                 {
                     incenseLogic.vfxSmoke.gameObject.SetActive(false);
                     incenseLogic.isEnabled = false;
-                }
-            }},
+                } }},
             { "Core/Bell", () => { objectsInHand.bell.enabled = false; } },
             { "Core/Frame Painting", () => { objectsInHand.paintingFrame.enabled = false; } },
             { "Core/Pennant", () => { objectsInHand.pennant.enabled = false; } },
             { "Core/Salt", () => { objectsInHand.salt.enabled = false; } },
-            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = false; } },
+            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = false; objectsInHand.waterLiquid.enabled = false; objectsInHand.corcho.enabled = false; } },
             { "Core/Chalice Wine", () => { objectsInHand.chaliceWine.enabled = false; objectsInHand.wineLiquid.enabled = false; } },
             { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = false; } },
-            
             { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = false; paloSantoLogic.enabled = false; } },
             { "Consumable/Key", () => { objectsInHand.key.enabled = false; keysLogic.enabled = false; } },
-            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = false; flashLightLogic.enabled = false; if (!pickedObject) flashLightLogic.pointLight.SetActive(false); }},
+            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = false; flashLightLogic.enabled = false;
+                if (!pickedObject)
+                {
+                    flashLightLogic.pointLight1.SetActive(false);
+                    flashLightLogic.pointLight2.SetActive(false);
+                } }},
             { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = false; ouijaLogic.enabled = false; } },
             { "Consumable/Cross", () => { objectsInHand.cross.enabled = false; crossLogic.enabled = false; isProtected = false; }},
-            { "Consumable/Rosary", () => { objectsInHand.rosary.enabled = false; rosaryLogic.enabled = false; isProtected = false; }}
-        };
+            { "Consumable/Rosary", () => { objectsInHand.rosary.enabled = false; rosaryLogic.enabled = false; isProtected = false; }} };
     }
 
     void Update()

@@ -27,7 +27,7 @@ public class ProtectionLogic : NetworkBehaviour
 
     private IEnumerator HandleDissolveAndDisable()
     {
-        yield return StartCoroutine(dissolveController.DissolveCo(2f));
+        yield return StartCoroutine(dissolveController.DissolveCo());
 
         objectsInHand.rosary.enabled = false;
         objectsInHand.cross.enabled = false;
@@ -36,6 +36,6 @@ public class ProtectionLogic : NetworkBehaviour
         pickUpController.currentPickedObject = null;
         pickUpController.pickedObject = false;
 
-        dissolveController.dissolveMat.SetFloat("_DissolveAmount", 0f);
+        //dissolveController.dissolveMat.SetFloat("_DissolveAmount", 0f);
     }
 }

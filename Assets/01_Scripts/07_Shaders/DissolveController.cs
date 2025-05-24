@@ -3,36 +3,32 @@ using UnityEngine.VFX;
 using UnityEngine;
 public class DissolveController : MonoBehaviour
 {
-    public Material dissolveMat;
+    public Material[] dissolveMat;
     public VisualEffect dissolveVFXGraph;
+
+    public float dissolveRate = 0.0125f;
+    public float refreshRate = 0.025f;
     private void Start()
     {
-        dissolveMat = GetComponent<MeshRenderer>().materials[0];
-        dissolveMat.SetFloat("_DissolveAmount", 0f);
+        dissolveMat = GetComponent<MeshRenderer>().materials;
     }
-    public IEnumerator DissolveCo(float duration)
+    public IEnumerator DissolveCo()
     {
-        float elapsed = 0f;
-        float startValue = dissolveMat.GetFloat("_DissolveAmount");
-        float targetValue = 1f;
+        if (dissolveMat.Length > 0)
+        {
+            float counter = 0f;
 
+            while (dissolveMat[0].GetFloat("_DissolveAmount") < 1)
+            {
+                counter += dissolveRate;
+                for (int i = 0; i < dissolveMat.Length; i++)
+                {
+                    dissolveMat[i].SetFloat("_DissolveAmount", counter);
+                }
+                yield return new WaitForSeconds(refreshRate);
+            }
+        }
         if (dissolveVFXGraph != null)
             dissolveVFXGraph.Play();
-        
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime; // aumentamos el tiempo seg�n lo que pasa por frame
-
-            // Interpolamos entre el valor inicial y final seg�n cu�nto tiempo ha pasado
-            float newValue = Mathf.Lerp(startValue, targetValue, elapsed / duration);
-
-            // Asignamos ese nuevo valor al shader
-            dissolveMat.SetFloat("_DissolveAmount", newValue);
-            
-            // Esperamos al siguiente frame antes de continuar
-            yield return null;
-        }
-            // Aseguramos que el valor final sea exactamente 1 (por si el bucle no lleg� exacto)
-            dissolveMat.SetFloat("_DissolveAmount", targetValue);   
     }
 }

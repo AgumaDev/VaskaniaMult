@@ -16,6 +16,8 @@ public class ObjectsInHand
     public Renderer key;
     public Renderer salt;
     public Renderer holyWater;
+    public Renderer waterLiquid;
+    public Renderer corcho;
     public Renderer pennant;
     public Renderer bell;
     public Renderer paintingFrame;

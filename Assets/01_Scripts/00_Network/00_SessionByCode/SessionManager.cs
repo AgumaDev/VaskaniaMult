@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,8 +8,17 @@ using Unity.Services.Multiplayer;
 using UnityEngine;
 using UnityUtils;
 
+public enum SessionIntent
+{
+    None,
+    Host,
+    Client
+}
+
 public class SessionManager : Singleton<SessionManager>
 {
+    public static SessionManager instance;
+
     ISession activeSession;
     ISession ActiveSession
     {
@@ -19,15 +29,25 @@ public class SessionManager : Singleton<SessionManager>
             Debug.Log($"Active session: {activeSession}");
         }
     }
-    
+
     const string playerNamePropertyKey = "playerName";
     public string PlayerName { get; set; } = "Jugador";
+
+    public string CurrentSessionCode { get; private set; }
     public string PlayerId => AuthenticationService.Instance.PlayerId;
-    
+
+    public SessionIntent PendingIntent { get; private set; } = SessionIntent.None;
+    public string PendingJoinCode { get; private set; }
+
     public Action<Dictionary<string, string>, string, bool> OnPlayerListUpdated;
 
     async void Start()
     {
+        if (instance != null)
+            Destroy(gameObject);
+        else instance = this;
+        DontDestroyOnLoad(gameObject);
+
         try
         {
             await UnityServices.InitializeAsync();
@@ -39,36 +59,66 @@ public class SessionManager : Singleton<SessionManager>
             Debug.LogException(e);
         }
     }
-    public async void CreateSession(Action<string> onSessionCreated)
+
+    public void SetHostIntent() => PendingIntent = SessionIntent.Host;
+    public void SetClientIntent(string joinCode)
     {
-        var playerProperties = new Dictionary<string, PlayerProperty>
-        {
-            { playerNamePropertyKey, new PlayerProperty(PlayerName, VisibilityPropertyOptions.Member) }
-        };
-
-        var options = new SessionOptions
-        {
-            MaxPlayers = 4,
-            IsLocked = false,
-            IsPrivate = false,
-            PlayerProperties = playerProperties
-        }.WithRelayNetwork();
-
-        ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-        Debug.Log($"Session {ActiveSession.Id} created! Join code: {ActiveSession.Code}");
-        onSessionCreated?.Invoke(ActiveSession.Code);
-
-        MonitorSessionPlayers();
+        PendingIntent = SessionIntent.Client;
+        PendingJoinCode = joinCode;
     }
-    public async void JoinSession(string sessionCode)
+
+    public async Task<bool> CreateSession()
     {
-        await AuthenticationService.Instance.UpdatePlayerNameAsync(PlayerName);
+        try
+        {
+            var playerProperties = new Dictionary<string, PlayerProperty>
+            {
+                { playerNamePropertyKey, new PlayerProperty(PlayerName, VisibilityPropertyOptions.Member) }
+            };
 
-        ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(sessionCode);
-        Debug.Log($"Joined session {ActiveSession.Id}");
+            var options = new SessionOptions
+            {
+                MaxPlayers = 5,
+                IsLocked = false,
+                IsPrivate = false,
+                PlayerProperties = playerProperties
+            }.WithRelayNetwork();
 
-        MonitorSessionPlayers();
+            ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
+            Debug.Log($"Session {ActiveSession.Id} created! Join code: {ActiveSession.Code}");
+
+            CurrentSessionCode = ActiveSession.Code;
+
+            MonitorSessionPlayers();
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to create session: {e}");
+            return false;
+        }
     }
+
+    public async Task<bool> JoinSession(string sessionCode)
+    {
+        try
+        {
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(PlayerName);
+
+            ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(sessionCode);
+            Debug.Log($"Joined session {ActiveSession.Id}");
+
+            CurrentSessionCode = ActiveSession.Code;
+            MonitorSessionPlayers();
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to join session: {e}");
+            return false;
+        }
+    }
+
     async void MonitorSessionPlayers()
     {
         while (ActiveSession != null)

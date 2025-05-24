@@ -39,9 +39,9 @@ public class PaloSantoLogic : NetworkBehaviour
         
         yield return new WaitForSeconds(5);
         
-        yield return StartCoroutine(dissolveController.DissolveCo(2f));
+        yield return StartCoroutine(dissolveController.DissolveCo());
         DisablePaloSantoRpc();
-        dissolveController.dissolveMat.SetFloat("_DissolveAmount", 0f);
+        //dissolveController.dissolveMat.SetFloat("_DissolveAmount", 0f);
         Debug.Log("Protection ended");
     }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+
 public class ServerObjectsSpawner : NetworkBehaviour
 {
     public List<GameObject> consumableItems = new List<GameObject>();
@@ -13,19 +14,37 @@ public class ServerObjectsSpawner : NetworkBehaviour
 
     public List<GameObject> selectedCoreItems = new List<GameObject>();
     public CandleSpawnerManager candleSpawner;
+
+    private int clientsLoaded = 0;
+
     public override void OnNetworkSpawn()
     {
-        if (!IsServer)
-        {
-            enabled = false;
-            return;
-        }
+        if (!IsServer) return;
 
-        SpawnKeyItems();
-        SpawnConsumableItems();
-        SpawnVelas();
+        NetworkManager.Singleton.SceneManager.OnSceneEvent += HandleSceneEvent;
     }
 
+    private void HandleSceneEvent(SceneEvent sceneEvent)
+    {
+        if (sceneEvent.SceneEventType == SceneEventType.LoadComplete)
+        {
+            if (sceneEvent.ClientId != NetworkManager.ServerClientId)
+            {
+                clientsLoaded++;
+            }
+
+            int totalClients = NetworkManager.Singleton.ConnectedClients.Count - 1;
+            if (clientsLoaded >= totalClients)
+            {
+                SpawnKeyItems();
+                SpawnConsumableItems();
+                SpawnVelas();
+
+                // Evitar doble ejecución
+                NetworkManager.Singleton.SceneManager.OnSceneEvent -= HandleSceneEvent;
+            }
+        }
+    }
     void SpawnConsumableItems()
     {
         int pastItemNumber = -1;

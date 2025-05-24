@@ -4,7 +4,8 @@ public class FlashLightLogic : NetworkBehaviour
 {
     [SerializeField] Animator anim;
     [SerializeField] public bool isEnabled;
-    [SerializeField] public GameObject pointLight;
+    [SerializeField] public GameObject pointLight1;
+    [SerializeField] public GameObject pointLight2;
     private void OnEnable()
     {
         anim.SetTrigger("Oil Lamp");
@@ -26,7 +27,8 @@ public class FlashLightLogic : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void ToggleFlashlightClientRpc(bool turnOn)
     {
-        pointLight.SetActive(turnOn);
+        pointLight1.SetActive(turnOn);
+        pointLight2.SetActive(turnOn);
         isEnabled = turnOn;
     }
 }

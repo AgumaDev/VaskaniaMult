@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 public class PlayerHealth : NetworkBehaviour
@@ -7,12 +8,16 @@ public class PlayerHealth : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
         if (!IsOwner) return;
 
-        if (other.CompareTag("DANGER"))
+        if (other.transform.CompareTag("DANGER"))
             TryHandleDangerServerRpc();
     }
-    
+
     [Rpc(SendTo.Server)]
     private void TryHandleDangerServerRpc()
     {

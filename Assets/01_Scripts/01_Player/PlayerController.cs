@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerController : NetworkBehaviour
 {
     public float speed;
-    public float jumpHeight;
     public float gravity;
     
     public Transform groundCheck;
@@ -11,6 +10,7 @@ public class PlayerController : NetworkBehaviour
     public LayerMask groundMask;
 
     public bool insideMainArea;
+    public Animator playerAnim;
     
     
     
@@ -30,6 +30,7 @@ public class PlayerController : NetworkBehaviour
     }
     void Movement()
     {
+        
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
         {
@@ -38,13 +39,14 @@ public class PlayerController : NetworkBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
+        if (x > 0 || z > 0)
+             playerAnim.SetBool("isMoving", true);
+        else 
+             playerAnim.SetBool("isMoving", false);
+        
         Vector3 move = transform.right * x + transform.forward * z;
         characterController.Move(move * (speed * Time.deltaTime));
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
+        
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }

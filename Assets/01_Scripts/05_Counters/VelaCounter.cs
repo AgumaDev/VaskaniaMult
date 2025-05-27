@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-public class VelaCounter : MonoBehaviour
+public class VelaCounter : NetworkBehaviour
 {
     private static VelaCounter _instance;
     public static VelaCounter Instance { get { return _instance; } }
@@ -11,15 +12,19 @@ public class VelaCounter : MonoBehaviour
     private void Awake()
     {
         if (_instance != null && _instance != this)
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         else 
             _instance = this;
     }
     private void Start()
     {
+        if (!IsServer)
+            return;
+        
         velas.AddRange(GameObject.FindGameObjectsWithTag("Vela"));
     }
-    public void VelaCount()
+    [Rpc(SendTo.Everyone)]
+    public void VelaCountRpc()
     {
         lightenedUp = 0;
         

@@ -6,7 +6,6 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Multiplayer;
 using UnityEngine;
-using UnityUtils;
 
 public enum SessionIntent
 {
@@ -15,9 +14,9 @@ public enum SessionIntent
     Client
 }
 
-public class SessionManager : Singleton<SessionManager>
+public class SessionManager : MonoBehaviour
 {
-    public static SessionManager instance;
+    public static SessionManager Instance;
 
     ISession activeSession;
     ISession ActiveSession
@@ -43,9 +42,9 @@ public class SessionManager : Singleton<SessionManager>
 
     async void Start()
     {
-        if (instance != null)
+        if (Instance != null)
             Destroy(gameObject);
-        else instance = this;
+        else Instance = this;
         DontDestroyOnLoad(gameObject);
 
         try

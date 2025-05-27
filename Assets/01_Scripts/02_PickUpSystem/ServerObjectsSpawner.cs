@@ -38,7 +38,7 @@ public class ServerObjectsSpawner : NetworkBehaviour
             {
                 SpawnKeyItems();
                 SpawnConsumableItems();
-                SpawnVelas();
+                //SpawnVelas();
 
                 // Evitar doble ejecución
                 NetworkManager.Singleton.SceneManager.OnSceneEvent -= HandleSceneEvent;
@@ -93,14 +93,15 @@ public class ServerObjectsSpawner : NetworkBehaviour
             selectedCoreItems.Add(selectedItem);
         }
     }
-    public void SpawnVelas()
-    {
-        for (int j = 0; j < selectedCoreItems.Count; j++)
-        {
-            if (selectedCoreItems[j].transform.CompareTag("Core/Lighter"))
-            {
-                candleSpawner.SpawnCandles();
-            }
-        }
-    }
+    
+    // public void SpawnVelas()
+    // {
+    //     for (int j = 0; j < selectedCoreItems.Count; j++)
+    //     {
+    //         if (selectedCoreItems[j].transform.CompareTag("Core/Lighter"))
+    //         {
+    //             candleSpawner.SpawnCandles();
+    //         }
+    //     }
+    // }
 }

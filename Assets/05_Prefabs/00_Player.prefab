@@ -6307,7 +6307,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 28799
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8430,6 +8430,8 @@ MonoBehaviour:
     m_Bits: 8
   insideMainArea: 0
   playerAnim: {fileID: 2531378595772625697}
+  playerModel: {fileID: 6063890617721659086}
+  localPlayerLayer: LocalPlayer
 --- !u!114 &6121339947075906749
 MonoBehaviour:
   m_ObjectHideFlags: 0

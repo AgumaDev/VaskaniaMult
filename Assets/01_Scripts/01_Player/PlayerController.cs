@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 public class PlayerController : NetworkBehaviour
@@ -11,7 +12,10 @@ public class PlayerController : NetworkBehaviour
 
     public bool insideMainArea;
     public Animator playerAnim;
-    
+
+    [Header("Player Culling Mask")]
+    [SerializeField] private GameObject playerModel;
+    [SerializeField] private string localPlayerLayer = "LocalPlayer";
     
     
     CharacterController characterController;
@@ -22,13 +26,20 @@ public class PlayerController : NetworkBehaviour
     { 
         characterController = GetComponent<CharacterController>();
     }
-
+    private void Start()
+    {
+        if (IsLocalPlayer)
+        {
+            int localLayer = LayerMask.NameToLayer(localPlayerLayer);
+            SetLayerRecursively(playerModel, localLayer);
+        }
+    }
     private void Update()
     {
         if (!IsOwner) return;
         Movement(); 
     }
-    void Movement()
+    private void Movement()
     {
         
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -39,7 +50,7 @@ public class PlayerController : NetworkBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
-        if (x > 0 || z > 0)
+        if (x > 0 || z > 0 || x < 0 || z < 0)
              playerAnim.SetBool("isMoving", true);
         else 
              playerAnim.SetBool("isMoving", false);
@@ -49,6 +60,18 @@ public class PlayerController : NetworkBehaviour
         
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+    }
+    private void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (obj == null) return;
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (child == null) continue;
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

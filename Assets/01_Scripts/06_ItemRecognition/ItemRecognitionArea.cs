@@ -1,14 +1,17 @@
+using System;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemRecognitionArea : MonoBehaviour
+public class ItemRecognitionArea : NetworkBehaviour
 {
     private static ItemRecognitionArea _instance;
     public static ItemRecognitionArea Instance { get { return _instance; } }
 
     private int coreItemNumber;
-    public int coreItemActivated;
+    public NetworkVariable<int> coreItemActivated = new NetworkVariable<int>(
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     
     public TextMeshProUGUI coreItemText;
 
@@ -19,44 +22,46 @@ public class ItemRecognitionArea : MonoBehaviour
     private void Awake()
     {
         if (_instance != null && _instance != this)
-        {
             Destroy(this.gameObject);
-        } else {
+        else 
             _instance = this;
-        }
     }
-    
     void Update()
     {
+        if(!IsServer)
+            return;
+        
         coreItemText.text = coreItemActivated.ToString();
         
-        if (candleActivated == true)
+        if (candleActivated)
         {
-            coreItemActivated++;
+            coreItemActivated.Value++;
             candleActivated = false;
         }
-        
-        if(Input.GetKeyDown(KeyCode.P))
-            SpawnNun();
 
-        if (coreItemActivated == 3)
+        if (coreItemActivated.Value == 3)
         {
-            SpawnNun();
+            SpawnNunRpc();
         }
     }
-
-    public void SpawnNun()
+    [Rpc(SendTo.Everyone)]
+    public void SpawnNunRpc()
     {
         nunEvent.SetActive(true);
-
     }
     public void DecalCounterUp()
     {
-        coreItemActivated++;
+        if(!IsServer)
+            return;
+        
+        coreItemActivated.Value++;
     }
     public void DecalCounterDown()
     {
-        coreItemActivated--;
+        if(!IsServer)
+            return;
+        
+        coreItemActivated.Value--;
     }
     private void OnTriggerEnter(Collider other)
     {

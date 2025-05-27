@@ -3,18 +3,13 @@ using Unity.Netcode;
 using UnityEngine;
 public class VelaCounter : NetworkBehaviour
 {
-    private static VelaCounter _instance;
-    public static VelaCounter Instance { get { return _instance; } }
-    
+    public static VelaCounter _instance;
     public List<GameObject> velas = new List<GameObject>();
 
     public int lightenedUp;
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-            Destroy(gameObject);
-        else 
-            _instance = this;
+        if (_instance != null) Destroy(this); else _instance = this;
     }
     private void Start()
     {
@@ -23,6 +18,7 @@ public class VelaCounter : NetworkBehaviour
         
         velas.AddRange(GameObject.FindGameObjectsWithTag("Vela"));
     }
+
     [Rpc(SendTo.Everyone)]
     public void VelaCountRpc()
     {
@@ -38,7 +34,7 @@ public class VelaCounter : NetworkBehaviour
         
         if (lightenedUp == 5)
         {
-            ItemRecognitionArea.Instance.candleActivated = true;
+            ItemRecognitionArea._instance.candleActivated = true;
         }
     }
 

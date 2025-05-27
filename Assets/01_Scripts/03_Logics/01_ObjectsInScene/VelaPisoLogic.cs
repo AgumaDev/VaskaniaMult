@@ -21,7 +21,7 @@ public class VelaPisoLogic : NetworkBehaviour
     private void LightCandleRpc()
     {
         pointLight.SetActive(true);
-        VelaCounter.Instance.VelaCountRpc();
+        VelaCounter._instance.VelaCountRpc();
         hasSentData = true;
     }
 }

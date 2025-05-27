@@ -2422,6 +2422,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1476068570}
   m_SourcePrefab: {fileID: 100100000, guid: a006ba73cf61bab458d88342f5e44244, type: 3}
+--- !u!1 &713826694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5887388446881647739, guid: 65e827291cf614d449b306f497ccfc14, type: 3}
+  m_PrefabInstance: {fileID: 1796681177}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &729156967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5887388446881647739, guid: 65e827291cf614d449b306f497ccfc14, type: 3}
+  m_PrefabInstance: {fileID: 379025969}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &729519942
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,6 +2777,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1881623044}
   m_SourcePrefab: {fileID: 100100000, guid: a006ba73cf61bab458d88342f5e44244, type: 3}
+--- !u!1 &734886192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5887388446881647739, guid: 65e827291cf614d449b306f497ccfc14, type: 3}
+  m_PrefabInstance: {fileID: 5411903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &774669987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4873,6 +4888,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1285472359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5887388446881647739, guid: 65e827291cf614d449b306f497ccfc14, type: 3}
+  m_PrefabInstance: {fileID: 691841394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1315500125
 GameObject:
   m_ObjectHideFlags: 0
@@ -6585,6 +6605,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1044031859264991140, guid: ef36a7fb84fb6fe43b601c9efc6cf88b, type: 3}
   m_PrefabInstance: {fileID: 1438574023}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1723961216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5887388446881647739, guid: 65e827291cf614d449b306f497ccfc14, type: 3}
+  m_PrefabInstance: {fileID: 2140700826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1746297651
 GameObject:
   m_ObjectHideFlags: 0
@@ -8221,7 +8246,6 @@ GameObject:
   - component: {fileID: 2001868326}
   - component: {fileID: 2001868325}
   - component: {fileID: 2001868324}
-  - component: {fileID: 2001868323}
   m_Layer: 0
   m_Name: Room_2
   m_TagString: MainArea
@@ -8244,24 +8268,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1813104625}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2001868323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001868321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10be3f876476a0042a6ea9c9be54b9ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  coreItemActivated:
-    m_InternalValue: 0
-  coreItemText: {fileID: 1602046109}
-  candleActivated: 0
-  nunEvent: {fileID: 1393282381}
 --- !u!65 &2001868324
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9280,7 +9286,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   coreItemActivated:
     m_InternalValue: 0
-  coreItemText: {fileID: 0}
+  coreItemText: {fileID: 1602046109}
   candleActivated: 0
   nunEvent: {fileID: 1393282381}
 --- !u!1 &469640294666019591
@@ -14857,15 +14863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  candlePrefab: {fileID: 5887388446881647739, guid: 65e827291cf614d449b306f497ccfc14, type: 3}
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   velaCounter: {fileID: 9154827437801811088}
-  spawnedCandles: 0
 --- !u!1 &1563395203526368895
 GameObject:
   m_ObjectHideFlags: 0
@@ -21057,6 +21055,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9154827437801811087}
+  - component: {fileID: 9154827437801811089}
   - component: {fileID: 9154827437801811088}
   m_Layer: 0
   m_Name: '# VelasCounter #'
@@ -48215,8 +48214,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  velas: []
+  velas:
+  - {fileID: 1285472359}
+  - {fileID: 1723961216}
+  - {fileID: 713826694}
+  - {fileID: 734886192}
+  - {fileID: 729156967}
   lightenedUp: 0
+--- !u!114 &9154827437801811089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3749991044109371285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1397616600
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!198 &9177870534294721243
 ParticleSystem:
   m_ObjectHideFlags: 0

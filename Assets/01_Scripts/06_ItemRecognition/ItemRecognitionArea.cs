@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class ItemRecognitionArea : NetworkBehaviour
 {
-    private static ItemRecognitionArea _instance;
-    public static ItemRecognitionArea Instance { get { return _instance; } }
+    public static ItemRecognitionArea _instance;
 
     private int coreItemNumber;
     public NetworkVariable<int> coreItemActivated = new NetworkVariable<int>(
@@ -21,17 +20,14 @@ public class ItemRecognitionArea : NetworkBehaviour
     
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-            Destroy(this.gameObject);
-        else 
-            _instance = this;
+        if (_instance != null) Destroy(this); else _instance = this;
     }
     void Update()
     {
         if(!IsServer)
             return;
         
-        coreItemText.text = coreItemActivated.ToString();
+        coreItemText.text = coreItemActivated.Value.ToString();
         
         if (candleActivated)
         {

@@ -4,11 +4,11 @@ public class LobbyInitializer : MonoBehaviour
 {
     async void Start()
     {
-        var intent = SessionManager.Instance.PendingIntent;
+        var intent = SessionManager.instance.PendingIntent;
 
         if (intent == SessionIntent.Host)
         {
-            bool success = await SessionManager.Instance.CreateSession();
+            bool success = await SessionManager.instance.CreateSession();
             if (success)
             {
                 NetworkManager.Singleton.StartHost();
@@ -16,7 +16,7 @@ public class LobbyInitializer : MonoBehaviour
         }
         else if (intent == SessionIntent.Client)
         {
-            bool success = await SessionManager.Instance.JoinSession(SessionManager.Instance.PendingJoinCode);
+            bool success = await SessionManager.instance.JoinSession(SessionManager.instance.PendingJoinCode);
             if (success)
             {
                 NetworkManager.Singleton.StartClient();

@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,7 +15,7 @@ public enum SessionIntent
 
 public class SessionManager : MonoBehaviour
 {
-    public static SessionManager Instance;
+    public static SessionManager instance;
 
     ISession activeSession;
     ISession ActiveSession
@@ -42,9 +41,9 @@ public class SessionManager : MonoBehaviour
 
     async void Start()
     {
-        if (Instance != null)
+        if (instance != null)
             Destroy(gameObject);
-        else Instance = this;
+        else instance = this;
         DontDestroyOnLoad(gameObject);
 
         try
@@ -135,25 +134,6 @@ public class SessionManager : MonoBehaviour
 
             OnPlayerListUpdated?.Invoke(dict, PlayerId, ActiveSession.IsHost);
             await Task.Delay(1000);
-        }
-    }
-
-    public async void LeaveSession()
-    {
-        if (ActiveSession != null)
-        {
-            try
-            {
-                await ActiveSession.AsHost().LeaveAsync();
-            }
-            catch
-            {
-                // Ignored
-            }
-            finally
-            {
-                ActiveSession = null;
-            }
         }
     }
 }

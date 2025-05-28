@@ -13,7 +13,6 @@ public class ServerObjectsSpawner : NetworkBehaviour
     public int coreItemCount;
 
     public List<GameObject> selectedCoreItems = new List<GameObject>();
-    public CandleSpawnerManager candleSpawner;
 
     private int clientsLoaded = 0;
 

@@ -63,14 +63,13 @@ public class DecalManager : NetworkBehaviour
 
         if (decalsInMainArea >= 3 && !hasSentData)
         {
-            ItemRecognitionArea._instance.DecalCounterUp();
+            ItemRecognitionArea.instance.DecalCounterUp();
             hasSentData = true;
-            print("poggies");
         }
 
         if (decalsInMainArea < 3 && hasSentData)
         {
-            ItemRecognitionArea._instance.DecalCounterDown();
+            ItemRecognitionArea.instance.DecalCounterDown();
             hasSentData = false;
         }
     }

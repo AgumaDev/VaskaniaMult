@@ -130,6 +130,8 @@ public class PickUpController : NetworkBehaviour
         if (!NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(objectId, out var obj)) return;
 
         SetRenderersActive(obj.gameObject, false);
+        
+        obj.GetComponent<Rigidbody>().isKinematic = false;
         obj.GetComponent<NetworkTransform>().InLocalSpace = false;
         obj.GetComponent<Collider>().enabled = false;
 
@@ -174,6 +176,7 @@ public class PickUpController : NetworkBehaviour
         obj.GetComponent<Collider>().enabled = true;
 
         var rb = obj.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
@@ -182,7 +185,6 @@ public class PickUpController : NetworkBehaviour
         if (IsOwner)
             currentPickedObject = null;
     }
-
     private void SetRenderersActive(GameObject obj, bool state)
     {
         foreach (var renderer in obj.GetComponentsInChildren<Renderer>(true))

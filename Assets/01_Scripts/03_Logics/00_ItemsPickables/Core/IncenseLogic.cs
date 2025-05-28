@@ -30,7 +30,7 @@ public class IncenseLogic : NetworkBehaviour
 
         if (isEnabled && isInArea && hasBeenUsed == false)
         {
-            ItemRecognitionArea._instance.coreItemActivated.Value++;
+            ItemRecognitionArea.instance.coreItemActivated.Value++;
             hasBeenUsed = true;
         }
     }

@@ -25,8 +25,8 @@ public class SessionUI : MonoBehaviour
     void OnCreateSessionClicked()
     {
         var name = playerNameInput.text;
-        SessionManager.Instance.PlayerName = string.IsNullOrWhiteSpace(name) ? "Jugador" : name;
-        SessionManager.Instance.SetHostIntent();
+        SessionManager.instance.PlayerName = string.IsNullOrWhiteSpace(name) ? "Jugador" : name;
+        SessionManager.instance.SetHostIntent();
 
         StartCoroutine(LoadLobbyScene());
     }
@@ -34,10 +34,10 @@ public class SessionUI : MonoBehaviour
     void OnJoinSessionClicked()
     {
         var name = playerNameInput.text;
-        SessionManager.Instance.PlayerName = string.IsNullOrWhiteSpace(name) ? "Jugador" : name;
+        SessionManager.instance.PlayerName = string.IsNullOrWhiteSpace(name) ? "Jugador" : name;
 
         var code = joinCodeInput.text;
-        SessionManager.Instance.SetClientIntent(code);
+        SessionManager.instance.SetClientIntent(code);
 
         StartCoroutine(LoadLobbyScene());
     }

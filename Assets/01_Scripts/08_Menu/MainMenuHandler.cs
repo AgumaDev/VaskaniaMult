@@ -41,9 +41,11 @@ public class MainMenuHandler : MonoBehaviour
 
     public TriggerBox currentSelectedTrigger;
 
-    public Animator bookAnim;
+    public BookRotation bookRotation;
 
     public GameObject playerPrefs;
+
+    public float transitionSpeed;
 
 
     public bool graphicsActive;
@@ -87,21 +89,21 @@ public class MainMenuHandler : MonoBehaviour
 
         if (graphicsActive)
         {
-            graphicsSettings.alpha += Time.deltaTime;
-            soundSettings.alpha -= Time.deltaTime;
-            controlSettings.alpha -= Time.deltaTime;
+            graphicsSettings.alpha += Time.deltaTime * transitionSpeed;
+            soundSettings.alpha -= Time.deltaTime * transitionSpeed;
+            controlSettings.alpha -= Time.deltaTime * transitionSpeed;
         }
         if (soundActive)
         {
-            graphicsSettings.alpha -= Time.deltaTime;
-            soundSettings.alpha += Time.deltaTime;
-            controlSettings.alpha -= Time.deltaTime;
+            graphicsSettings.alpha -= Time.deltaTime * transitionSpeed;
+            soundSettings.alpha += Time.deltaTime * transitionSpeed;
+            controlSettings.alpha -= Time.deltaTime * transitionSpeed;
         }
         if (controlsActive)
         {
-            graphicsSettings.alpha -= Time.deltaTime;
-            soundSettings.alpha -= Time.deltaTime;
-            controlSettings.alpha += Time.deltaTime;
+            graphicsSettings.alpha -= Time.deltaTime * transitionSpeed;
+            soundSettings.alpha -= Time.deltaTime * transitionSpeed;
+            controlSettings.alpha += Time.deltaTime * transitionSpeed;
         }
     }
 
@@ -189,7 +191,7 @@ public class MainMenuHandler : MonoBehaviour
             {
                 if (selectedOption == false)
                 {
-                    if (hit.transform.GetComponent<TriggerBox>())
+                    if (hit.transform.GetComponent<TriggerBox>() && hit.transform.CompareTag("Menu/Book"))
                     {
                         hit.transform.GetComponent<TriggerBox>().isHovered = true;
                         hit.transform.GetComponent<TriggerBox>().hoverTime = 0.1f;
@@ -201,18 +203,34 @@ public class MainMenuHandler : MonoBehaviour
                             hit.transform.GetComponent<TriggerBox>().hasBeenClicked = true;
                             selectedOption = true;
                             currentSelectedTrigger = hit.transform.GetComponent<TriggerBox>();
-                            
-                            bookAnim.SetBool("PressBool", true);
+
+                            bookRotation.OpenBook();
+                        }
+                    }
+                    if (hit.transform.GetComponent<TriggerBox>() && hit.transform.CompareTag("Menu/TV"))
+                    {
+                        hit.transform.GetComponent<TriggerBox>().isHovered = true;
+                        hit.transform.GetComponent<TriggerBox>().hoverTime = 0.1f;
+
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            hit.transform.GetComponent<TriggerBox>().cinemachineCamMain.SetActive(false);
+                            hit.transform.GetComponent<TriggerBox>().cinemachineCamBook.SetActive(true);
+                            hit.transform.GetComponent<TriggerBox>().hasBeenClicked = true;
+                            selectedOption = true;
+                            currentSelectedTrigger = hit.transform.GetComponent<TriggerBox>();
                         }
                     }
                 }
+                
+                if()
             }
         }
         else
         {
             if (Physics.Raycast(ray, out hit, 1000, selectedLayerMask))
             {
-                if (hit.transform.GetComponent<ReturnBox>())
+                if (hit.transform.GetComponent<ReturnBox>() && hit.transform.CompareTag("Menu/Book"))
                 {
                     print("a");
                     if (Input.GetMouseButtonDown(0))
@@ -224,7 +242,20 @@ public class MainMenuHandler : MonoBehaviour
                         currentSelectedTrigger.hasBeenClicked = false;
                         currentSelectedTrigger = null;
                         
-                        bookAnim.SetBool("PressBool", false);
+                        bookRotation.OpenBook();
+                    }
+                }
+                if (hit.transform.GetComponent<ReturnBox>() && hit.transform.CompareTag("Menu/TV"))
+                {
+                    print("a");
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        CinemachineBookCam.SetActive(false);
+                        CinemachineTVCam.SetActive(false);
+                        CinemachineMainCam.SetActive(true);
+                        selectedOption = false;
+                        currentSelectedTrigger.hasBeenClicked = false;
+                        currentSelectedTrigger = null;
                     }
                 }
             }

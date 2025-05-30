@@ -25,6 +25,9 @@ TagManager:
   - Consumable/Key
   - Consumable/Holy Wood
   - Consumable/Ouija
+  - Menu/Book
+  - Menu/TV
+  - Menu/Candle
   layers:
   - Default
   - TransparentFX

@@ -38,9 +38,7 @@ public class RoomSystem : NetworkBehaviour
     }
 
     private void Update()
-    {
-        if(!IsServer) return;
-        
+    {     
         if(playersInRoom.Count >= 1 && roomEvents.Count > 0)
         {
             timerToEvent += Time.deltaTime;

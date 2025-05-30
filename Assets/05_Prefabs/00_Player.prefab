@@ -104,7 +104,7 @@ VisualEffect:
       - m_Value: {x: 0.000000807823, y: 0.00000020294158, z: -0.00000023430806}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: 0.00000015385038, y: -0.00000036093178, z: -0.000000037185025}
+      - m_Value: {x: -0.000000048087287, y: -0.00000047966455, z: -0.00000027598867}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 500.00006, y: 500.00003, z: 500.00003}
@@ -786,7 +786,7 @@ VisualEffect:
       - m_Value: {x: 270.01978, y: 0.0000025875352, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: -0.000000018944842, y: 0.00000003488218, z: -0.0000002107222}
+      - m_Value: {x: -0.000000020877405, y: -0.0000002263615, z: -0.000000084003986}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 250, y: 250.00008, z: 250.00005}
@@ -3156,7 +3156,7 @@ VisualEffect:
       - m_Value: {x: 270, y: 0, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: 0.000000029802322, y: 0.00000012518672, z: -0.000000013915042}
+      - m_Value: {x: 0.000000029802322, y: 0.00000012518672, z: -0.000000057307204}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 250, y: 250.00009, z: 250.00009}
@@ -6260,7 +6260,7 @@ Transform:
   m_GameObject: {fileID: 7391367262118914308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.858, z: 0.166}
+  m_LocalPosition: {x: 0, y: 0.858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6500,7 +6500,7 @@ Transform:
   m_GameObject: {fileID: 7527945642935984893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6581,7 +6581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 6735818888035341166}
-  initialPos: {x: 0, y: 0, z: 1.5}
+  initialPos: {x: 0, y: 0, z: 1.7}
   step: 0.01
   maxStepDistance: 0.06
   rotationStep: 4
@@ -8445,19 +8445,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  speed: 5
-  gravity: -9.8
+  playerState: 0
+  velocity: {x: 0, y: 0, z: 0}
+  walkingSpeed: 5
+  runningSpeed: 12
+  gravity: -19.8
+  stamina: 0
+  maxStamina: 100
+  minStaminaToRun: 40
+  staminaDecreaseSpeed: 20
+  staminaIncreaseSpeed: 20
   groundCheck: {fileID: 4163971650934679999}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   isGrounded: 0
-  insideMainArea: 0
-  playerAnim: {fileID: 2531378595772625697}
   playerModel: {fileID: 6063890617721659086}
   localPlayerLayer: LocalPlayer
-  velocity: {x: 0, y: 0, z: 0}
+  insideMainArea: 0
+  playerAnim: {fileID: 2531378595772625697}
 --- !u!114 &6121339947075906749
 MonoBehaviour:
   m_ObjectHideFlags: 0

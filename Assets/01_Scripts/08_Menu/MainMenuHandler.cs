@@ -223,7 +223,7 @@ public class MainMenuHandler : MonoBehaviour
                     }
                 }
                 
-                if()
+               
             }
         }
         else

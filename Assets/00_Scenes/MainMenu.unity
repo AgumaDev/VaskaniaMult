@@ -7523,7 +7523,7 @@ GameObject:
   - component: {fileID: 484202916}
   m_Layer: 0
   m_Name: PlayerPrefs
-  m_TagString: Untagged
+  m_TagString: PlayerPrefs
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8141,10 +8141,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1783393147}
   m_HandleRect: {fileID: 596426572}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.01
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.01
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

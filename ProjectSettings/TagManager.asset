@@ -28,6 +28,7 @@ TagManager:
   - Menu/Book
   - Menu/TV
   - Menu/Candle
+  - PlayerPrefs
   layers:
   - Default
   - TransparentFX

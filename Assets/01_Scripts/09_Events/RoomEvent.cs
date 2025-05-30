@@ -1,6 +1,6 @@
 using UnityEngine;
-
-public class RoomEvent : MonoBehaviour
+using Unity.Netcode;
+public class RoomEvent : NetworkBehaviour
 {
     [Header("## ROOM EVENT ##")]
     [Space(5)]
@@ -13,10 +13,18 @@ public class RoomEvent : MonoBehaviour
         Door,
         Levitate
     }
-
-    public void TriggerEvent()
+    
+    [Rpc(SendTo.Server)]
+    public void RequestTriggerEventServerRpc()
     {
-        print($"EVENT TRIGGERED: {roomEvent}");
+        Debug.Log($"EVENT TRIGGERED: {roomEvent}");
+        TriggerEventClientRpc();
+    }
+    
+    [Rpc(SendTo.Everyone)]
+    void TriggerEventClientRpc()
+    {
         eventGameObjectRef.SetActive(true);
     }
+
 }

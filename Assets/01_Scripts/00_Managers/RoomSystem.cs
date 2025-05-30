@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-public class RoomSystem : MonoBehaviour
+using Unity.Netcode;
+public class RoomSystem : NetworkBehaviour
 {
     [Header("## ROOM SYSTEM ##")]
     [Space(5)]
@@ -18,10 +18,11 @@ public class RoomSystem : MonoBehaviour
     //public TextMeshProUGUI datos;
     int CurrentEventChange() {  return baseEventChance + bonusEventChance; }
 
-    [Header("OTHER")]
-    int playerInRoom;
-    [SerializeField] public bool inRoom;
+    [Header("PLAYER RELATED")]
+    [SerializeField] public NetworkVariable<bool> inRoom;
+    [SerializeField] private List<GameObject> playersInRoom = new();
 
+    [Header("ROOM EVENTS")]
     public List<RoomEvent> roomEvents = new();
 
     void Awake()
@@ -38,7 +39,9 @@ public class RoomSystem : MonoBehaviour
 
     private void Update()
     {
-        if(playerInRoom == 1 && roomEvents.Count > 0)
+        if(!IsServer) return;
+        
+        if(playersInRoom.Count >= 1 && roomEvents.Count > 0)
         {
             timerToEvent += Time.deltaTime;
             if(timerToEvent >= timeToEvent)
@@ -61,9 +64,7 @@ public class RoomSystem : MonoBehaviour
     public void CheckEventChance()
     {
         if(Random.Range(0, 100) < CurrentEventChange())
-        {
             TriggerRandomEvent();
-        }
         else
         {
             //??
@@ -75,7 +76,7 @@ public class RoomSystem : MonoBehaviour
     {
         bonusEventChance = 0;
         int randomEventIndex = Random.Range(0, roomEvents.Count);
-        roomEvents[randomEventIndex].TriggerEvent();
+        roomEvents[randomEventIndex].RequestTriggerEventServerRpc();
         roomEvents.RemoveAt(randomEventIndex);
     }
 
@@ -83,17 +84,16 @@ public class RoomSystem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         { 
-            playerInRoom++;
-            inRoom = true;
+            playersInRoom.Add(other.gameObject);
+            inRoom.Value = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-
         if (other.gameObject.CompareTag("Player"))
         {
-            playerInRoom--;
-            inRoom = false;
+            playersInRoom.Remove(other.gameObject);
+            inRoom.Value = false;
         }
     }
 }

@@ -9,6 +9,7 @@ public class PlayerController : NetworkBehaviour
     public Transform groundCheck;
     public float groundDistance;
     public LayerMask groundMask;
+    public bool isGrounded;
 
     public bool insideMainArea;
     public Animator playerAnim;
@@ -19,8 +20,7 @@ public class PlayerController : NetworkBehaviour
     
     
     CharacterController characterController;
-    bool isGrounded;
-    Vector3 velocity;
+    public Vector3 velocity;
     
     public override void OnNetworkSpawn()
     { 
@@ -31,7 +31,7 @@ public class PlayerController : NetworkBehaviour
         if (IsLocalPlayer)
         {
             int localLayer = LayerMask.NameToLayer(localPlayerLayer);
-            SetLayerRecursively(playerModel, localLayer);
+            CullingLayer(playerModel, localLayer);
         }
     }
     private void Update()
@@ -41,7 +41,6 @@ public class PlayerController : NetworkBehaviour
     }
     private void Movement()
     {
-        
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
         {
@@ -50,7 +49,7 @@ public class PlayerController : NetworkBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
-        if (x > 0 || z > 0 || x < 0 || z < 0)
+        if (x != 0 || z != 0)
              playerAnim.SetBool("isMoving", true);
         else 
              playerAnim.SetBool("isMoving", false);
@@ -61,7 +60,11 @@ public class PlayerController : NetworkBehaviour
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
-    private void SetLayerRecursively(GameObject obj, int newLayer)
+    public void ResetVerticalVelocity()
+    {
+        velocity.y = 0f;
+    }
+    private void CullingLayer(GameObject obj, int newLayer)
     {
         if (obj == null) return;
 
@@ -70,7 +73,7 @@ public class PlayerController : NetworkBehaviour
         foreach (Transform child in obj.transform)
         {
             if (child == null) continue;
-            SetLayerRecursively(child.gameObject, newLayer);
+            CullingLayer(child.gameObject, newLayer);
         }
     }
     private void OnTriggerEnter(Collider other)

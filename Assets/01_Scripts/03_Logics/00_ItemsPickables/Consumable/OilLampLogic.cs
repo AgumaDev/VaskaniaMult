@@ -1,6 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
-public class FlashLightLogic : NetworkBehaviour
+public class OilLampLogic : NetworkBehaviour
 {
     [SerializeField] Animator anim;
     [SerializeField] public bool isEnabled;

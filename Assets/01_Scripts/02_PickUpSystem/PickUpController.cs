@@ -2,6 +2,8 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Netcode.Components;
+using UnityEngine.Serialization;
+
 public class PickUpController : NetworkBehaviour
 {
     [Header("PickUp Logic")]
@@ -13,12 +15,13 @@ public class PickUpController : NetworkBehaviour
     [SerializeField] public NetworkObject currentPickedObject;
     [SerializeField] public bool pickedObject;
 
+    [FormerlySerializedAs("flashLightLogic")]
     [Header("Picked Objects Logic")]
-    [SerializeField] private FlashLightLogic flashLightLogic;
+    [SerializeField] private OilLampLogic oilLampLogic;
     [SerializeField] private OuijaLogic ouijaLogic;
     [SerializeField] private ProtectionLogic crossLogic;
     [SerializeField] private ProtectionLogic rosaryLogic;
-    [SerializeField] private PaloSantoLogic paloSantoLogic;
+    [FormerlySerializedAs("paloSantoLogic")] [SerializeField] private HollyWoodLogic hollyWoodLogic;
     [SerializeField] private IncenseLogic incenseLogic;
     [SerializeField] private KeysLogic keysLogic;
     [SerializeField] private EncendedorLogic encendedorLogic;
@@ -45,8 +48,8 @@ public class PickUpController : NetworkBehaviour
             { "Core/Pennant", () => { objectsInHand.pennant.enabled = true; } },
             { "Core/Salt", () => { objectsInHand.salt.enabled = true; } },
             { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = true; objectsInHand.waterLiquid.enabled = true; objectsInHand.corcho.enabled = true; } },
-            { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = true; paloSantoLogic.enabled = true; } },
-            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = true; flashLightLogic.enabled = true; } },
+            { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = true; hollyWoodLogic.enabled = true; } },
+            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = true; oilLampLogic.enabled = true; } },
             { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = true; ouijaLogic.enabled = true; } },
             { "Consumable/Cross", () => { objectsInHand.cross.enabled = true; crossLogic.enabled = true; isProtected = true; playerHealth.protectionLogic = crossLogic; }},
             { "Consumable/Rosary", () => { objectsInHand.rosary.enabled = true; rosaryLogic.enabled = true; isProtected = true; playerHealth.protectionLogic = rosaryLogic; }},
@@ -76,13 +79,13 @@ public class PickUpController : NetworkBehaviour
             { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = false; objectsInHand.waterLiquid.enabled = false; objectsInHand.corcho.enabled = false; } },
             { "Core/Chalice Wine", () => { objectsInHand.chaliceWine.enabled = false; objectsInHand.wineLiquid.enabled = false; } },
             { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = false; } },
-            { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = false; paloSantoLogic.enabled = false; } },
+            { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = false; hollyWoodLogic.enabled = false; } },
             { "Consumable/Key", () => { objectsInHand.key.enabled = false; keysLogic.enabled = false; } },
-            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = false; flashLightLogic.enabled = false;
+            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = false; oilLampLogic.enabled = false;
                 if (!pickedObject)
                 {
-                    flashLightLogic.pointLight1.SetActive(false);
-                    flashLightLogic.pointLight2.SetActive(false);
+                    oilLampLogic.pointLight1.SetActive(false);
+                    oilLampLogic.pointLight2.SetActive(false);
                 } }},
             { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = false; ouijaLogic.enabled = false; } },
             { "Consumable/Cross", () => { objectsInHand.cross.enabled = false; crossLogic.enabled = false; isProtected = false; }},

@@ -1,7 +1,7 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
-public class PaloSantoLogic : NetworkBehaviour
+public class HollyWoodLogic : NetworkBehaviour
 {
     [SerializeField] public RoomSystem roomSystem;
     [SerializeField] private ObjectsInHand objectsInHand;
@@ -21,7 +21,7 @@ public class PaloSantoLogic : NetworkBehaviour
     }
     private void TryInvisibility()
     {
-        if (roomSystem.inRoom)
+        if (roomSystem.inRoom.Value)
             ProtectionRpc();
         else
             Debug.Log("not in room");
@@ -41,7 +41,6 @@ public class PaloSantoLogic : NetworkBehaviour
         
         yield return StartCoroutine(dissolveController.DissolveCo());
         DisablePaloSantoRpc();
-        //dissolveController.dissolveMat.SetFloat("_DissolveAmount", 0f);
         Debug.Log("Protection ended");
     }
 

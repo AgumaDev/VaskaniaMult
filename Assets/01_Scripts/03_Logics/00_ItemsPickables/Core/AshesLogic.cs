@@ -1,6 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
-public class CenizasLogic : NetworkBehaviour
+public class AshesLogic : NetworkBehaviour
 {
     [SerializeField] private GameObject playerCameraObject;
     [SerializeField] private GameObject raycastStartPoint;
@@ -24,7 +24,7 @@ public class CenizasLogic : NetworkBehaviour
     private void TryPlaceAshes()
     {
         Ray ray = new Ray(raycastStartPoint.transform.position, playerCameraObject.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * 3f, Color.green);
+        Debug.DrawRay(ray.origin, ray.direction * 3f, Color.gray);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3f))
         {

@@ -24,20 +24,14 @@ public class TeleportRandomLocation : MonoBehaviour
                 
                 
                 playersInside[i].GetComponent<PlayerController>().enabled = false;
-                playersInside[i].GetComponent<CharacterController>().enabled = false;
-
-                print("a");
+                // playersInside[i].GetComponent<CharacterController>().enabled = false;
                 
                 playersInside[i].transform.position = possibleTeleportLocations[0].transform.position;
                 playersInside[i].transform.position = possibleTeleportLocations[Random.Range(0, possibleTeleportLocations.Count)].transform.position;
                 
-                print("b");
-                
-                playersInside[i].GetComponent<CharacterController>().enabled = true;
+                // playersInside[i].GetComponent<CharacterController>().enabled = true;
                 playersInside[i].GetComponent<PlayerController>().enabled = true;
                 playersInside.Remove(playersInside[i]);
-                
-                print("c");
             }
 
             hasTeleported = true;
@@ -51,4 +45,12 @@ public class TeleportRandomLocation : MonoBehaviour
             playersInside.Add(other.gameObject);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.CompareTag("Player"))
+        {
+            playersInside.Remove(other.gameObject);
+        }
+    }   
 }

@@ -25,6 +25,7 @@ TagManager:
   - Consumable/Key
   - Consumable/Holy Wood
   - Consumable/Ouija
+  - Room
   layers:
   - Default
   - TransparentFX

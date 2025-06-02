@@ -10,25 +10,15 @@ public class LevitateEvent : MonoBehaviour
     public List<Rigidbody> objectsInside;
     public List<PlayerController> playersInside;
 
-    private void OnTriggerStay(Collider other)
+    private void FixedUpdate()
     {
-        var rb = other.attachedRigidbody;
-        var pc = other.GetComponent<PlayerController>();
-
-        if (rb != null && !objectsInside.Contains(rb))
+        foreach (Rigidbody rb in objectsInside)
         {
-            rb.useGravity = false;
-            rb.AddForce(Vector3.up * levitationRbForce, ForceMode.Acceleration);
-            objectsInside.Add(rb);
+            if (rb != null)
+            {
+                rb.AddForce(Vector3.up * levitationRbForce, ForceMode.Acceleration);
+            }
         }
-        
-        if (pc != null && !playersInside.Contains(pc))
-        {
-            pc.gravity = levitationPcForce;
-            playersInside.Add(pc);
-            pc.ResetVerticalVelocity(); 
-        }
-        
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -70,17 +60,6 @@ public class LevitateEvent : MonoBehaviour
                 playersInside.Remove(pc);
             }
             
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        foreach (Rigidbody rb in objectsInside)
-        {
-            if (rb != null)
-            {
-                rb.AddForce(Vector3.up * levitationRbForce, ForceMode.Acceleration);
-            }
         }
     }
 }

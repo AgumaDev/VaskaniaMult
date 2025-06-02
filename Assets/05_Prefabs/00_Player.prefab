@@ -786,7 +786,7 @@ VisualEffect:
       - m_Value: {x: 270.01978, y: 0.0000025875352, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: -0.000000020877405, y: -0.0000002263615, z: -0.000000084003986}
+      - m_Value: {x: -0.000000020877405, y: -0.0000002263615, z: 0.000000035205304}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 250, y: 250.00008, z: 250.00005}
@@ -3276,7 +3276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4287290532963172912
 Transform:
   m_ObjectHideFlags: 0
@@ -3285,13 +3285,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4522493005531162684}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.73350513, y: 4.656613e-10, z: -0, w: 0.679684}
-  m_LocalPosition: {x: 0.00032, y: 0.0028, z: 0.498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.002, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 981580835832729149}
-  m_LocalEulerAnglesHint: {x: -94.362, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &8373325784474115997
 Light:
   m_ObjectHideFlags: 0
@@ -6242,8 +6242,8 @@ GameObject:
   - component: {fileID: 5562066938856816887}
   - component: {fileID: 1631733924547512834}
   - component: {fileID: 2456347314469587091}
-  - component: {fileID: 9025216384039717899}
   - component: {fileID: 6390281731115989430}
+  - component: {fileID: 3519032242612557963}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6260,7 +6260,7 @@ Transform:
   m_GameObject: {fileID: 7391367262118914308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.858, z: 0}
+  m_LocalPosition: {x: 0, y: 0.85800004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6327,21 +6327,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7391367262118914308}
   m_Enabled: 1
---- !u!114 &9025216384039717899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7391367262118914308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 359891e1c40a6e549906bf67ca13db9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  mouseSensitivity: 200
-  playerTransform: {fileID: 4777716975911209644}
 --- !u!114 &6390281731115989430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6386,6 +6371,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &3519032242612557963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391367262118914308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359891e1c40a6e549906bf67ca13db9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  mouseSensitivity: 200
+  playerTransform: {fileID: 4777716975911209644}
 --- !u!1 &7478117873787960386
 GameObject:
   m_ObjectHideFlags: 0
@@ -8293,6 +8293,8 @@ GameObject:
   - component: {fileID: 6121339947075906749}
   - component: {fileID: 7518444185040659105}
   - component: {fileID: 3368580537400946824}
+  - component: {fileID: 6396911142537874487}
+  - component: {fileID: 8222252080981237324}
   m_Layer: 0
   m_Name: 00_Player
   m_TagString: Player
@@ -8450,6 +8452,8 @@ MonoBehaviour:
   walkingSpeed: 5
   runningSpeed: 12
   gravity: -19.8
+  x: 0
+  z: 0
   stamina: 0
   maxStamina: 100
   minStaminaToRun: 40
@@ -8494,7 +8498,7 @@ MonoBehaviour:
   incenseLogic: {fileID: 4460930882526737316}
   keysLogic: {fileID: 4136895825480585192}
   encendedorLogic: {fileID: 2798719099368794175}
-  cenizasLogic: {fileID: 5650421764886209748}
+  ashesLogic: {fileID: 5650421764886209748}
   playerHealth: {fileID: 7518444185040659105}
   objectsInHand:
     chaliceOstia: {fileID: 1743306575787596573}
@@ -8546,6 +8550,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   nameText: {fileID: 5015234466063027103}
+--- !u!114 &6396911142537874487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168359630788606793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de892afdd84aab4db66d3a84ae8b205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enabled: 1
+  amplitude: 0.003
+  frequency: 10.5
+  cam: {fileID: 5562066938856816887}
+--- !u!114 &8222252080981237324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168359630788606793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8be2fabc516cd54888bc0a38a444bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  insideRoomSystem: {fileID: 0}
 --- !u!1 &9186996810767966610
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,97 +1,98 @@
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
+
 public class RoomSystem : NetworkBehaviour
 {
     [Header("## ROOM SYSTEM ##")]
-    [Space(5)]
+    [Space(5f)]
+    
+    [SerializeField] private float timeToEvent;
+    private float timerToEvent;
+    private bool eventTriggered;
 
-    [Header("EVENT")]
-    [SerializeField] float timeToEvent;
-    float timerToEvent;
-
-    [Header("EVENT CHANCE")]
-    public int baseEventChance; //PROBABILIDAD BASE
-    public int bonusEventChance; //PROBABILIDAD ACUMULADA EN BASE A FALLOS
-    public float bonusEventChanceMultiplier; //MULTIPLICADOR EN CASO DE 
-
-    //public TextMeshProUGUI datos;
-    int CurrentEventChange() {  return baseEventChance + bonusEventChance; }
+    [Header("EVENT DATA")]
+    [Space(5f)]
+    
+    [SerializeField] private int baseEventChance;
+    [SerializeField] private int bonusEventChance;
+    [SerializeField] private float bonusEventChanceMultiplier;
+    [SerializeField] private float eventCoolDown;
+    private int CurrentEventChance() => baseEventChance + bonusEventChance;
 
     [Header("PLAYER RELATED")]
-    [SerializeField] public NetworkVariable<bool> inRoom;
-    [SerializeField] private List<GameObject> playersInRoom = new();
+    [Space(5f)]
+
+    public List<GameObject> playersInRoom;
 
     [Header("ROOM EVENTS")]
-    public List<RoomEvent> roomEvents = new();
+    [Space(5f)]
 
-    void Awake()
+    [SerializeField] private List<RoomEvent> roomEvents = new();
+
+    private void Awake()
     {
         roomEvents.Clear();
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
-            if(child.TryGetComponent(out RoomEvent roomEvent))
-            {
+            if (child.TryGetComponent(out RoomEvent roomEvent))
                 roomEvents.Add(roomEvent);
-            }
         }
     }
 
     private void Update()
-    {     
-        if(playersInRoom.Count >= 1 && roomEvents.Count > 0)
+    {
+        if (!IsServer) return;
+
+        if (playersInRoom.Count > 0 && roomEvents.Count > 0 && !eventTriggered)
         {
             timerToEvent += Time.deltaTime;
-            if(timerToEvent >= timeToEvent)
+            if (timerToEvent >= timeToEvent)
             {
-                timerToEvent = 0; //¿COOLDOWN?
+                timerToEvent = 0;
                 CheckEventChance();
             }
         }
-
-        //datos.text = "TAB to open book" + "<br><br>" + "Players In Room = " + playerInRoom +  "<br>" + "Base event chance = " + baseEventChance + "<br>" +
-                    // "Bonus event chance= " + bonusEventChance + "<br>" + "Total Event Chance = " + (baseEventChance +
-                     //    bonusEventChance) + "<br>" +"Timer for event = " + timerToEvent; 
     }
 
-    public void ItemSpawning()
-    { 
-        
-    }
-
-    public void CheckEventChance()
+    private void CheckEventChance()
     {
-        if(Random.Range(0, 100) < CurrentEventChange())
+        if (Random.Range(0, 100) < CurrentEventChance())
             TriggerRandomEvent();
         else
-        {
-            //??
             bonusEventChance += Mathf.RoundToInt(baseEventChance / bonusEventChanceMultiplier);
-        }
     }
 
-    void TriggerRandomEvent()
+    private void TriggerRandomEvent()
     {
+        int randomIndex = Random.Range(0, roomEvents.Count);
+        RoomEvent selectedEvent = roomEvents[randomIndex];
+
+        selectedEvent.TriggerEvent();
+        roomEvents.RemoveAt(randomIndex);
         bonusEventChance = 0;
-        int randomEventIndex = Random.Range(0, roomEvents.Count);
-        roomEvents[randomEventIndex].RequestTriggerEventServerRpc();
-        roomEvents.RemoveAt(randomEventIndex);
+        eventTriggered = true;
+
+        StartCoroutine(EventCoolDown());
     }
 
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator EventCoolDown()
     {
-        if (other.gameObject.CompareTag("Player"))
-        { 
-            playersInRoom.Add(other.gameObject);
-            inRoom.Value = true;
-        }
+        yield return new WaitForSeconds(eventCoolDown); // cambiar si necesitamos más tiempo entre eventos
+        eventTriggered = false;
     }
-    private void OnTriggerExit(Collider other)
+
+    [Rpc(SendTo.Server)]
+    public void AddPlayerToRoomRpc(NetworkObjectReference player)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            playersInRoom.Remove(other.gameObject);
-            inRoom.Value = false;
-        }
+        if (!playersInRoom.Contains(player))
+            playersInRoom.Add(player);
+    }
+
+    [Rpc(SendTo.Server)]
+    public void RemovePlayerFromRoomRpc(NetworkObjectReference player)
+    {
+        playersInRoom.Remove(player);
     }
 }

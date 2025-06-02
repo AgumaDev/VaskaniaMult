@@ -25,7 +25,7 @@ public class PickUpController : NetworkBehaviour
     [SerializeField] private IncenseLogic incenseLogic;
     [SerializeField] private KeysLogic keysLogic;
     [SerializeField] private EncendedorLogic encendedorLogic;
-    [SerializeField] private CenizasLogic cenizasLogic;
+    [FormerlySerializedAs("cenizasLogic")] [SerializeField] private AshesLogic ashesLogic;
     public PlayerHealth playerHealth;
 
     [SerializeField] private ObjectsInHand objectsInHand;
@@ -42,7 +42,7 @@ public class PickUpController : NetworkBehaviour
             { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = true; } },
             { "Core/Incense", () => { objectsInHand.incense.enabled = true; incenseLogic.enabled = true; incenseLogic.vfxSmoke.gameObject.SetActive(true); } },
             { "Core/Lighter", () => { objectsInHand.lighter.enabled = true; encendedorLogic.enabled = true; } },
-            { "Core/Ashes", () => { objectsInHand.ashes.enabled = true; cenizasLogic.enabled = true; } },
+            { "Core/Ashes", () => { objectsInHand.ashes.enabled = true; ashesLogic.enabled = true; } },
             { "Core/Bell", () => { objectsInHand.bell.enabled = true; } },
             { "Core/Frame Painting", () => { objectsInHand.paintingFrame.enabled = true; } },
             { "Core/Pennant", () => { objectsInHand.pennant.enabled = true; } },
@@ -65,7 +65,7 @@ public class PickUpController : NetworkBehaviour
                     encendedorLogic.isLighted = false;
                 }
             }},
-            { "Core/Ashes", () => { objectsInHand.ashes.enabled = false; cenizasLogic.enabled = false; } },
+            { "Core/Ashes", () => { objectsInHand.ashes.enabled = false; ashesLogic.enabled = false; } },
             { "Core/Incense", () => { objectsInHand.incense.enabled = false; incenseLogic.enabled = false;
                 if (!pickedObject)
                 {

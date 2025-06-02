@@ -19,6 +19,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float walkingSpeed;
     [SerializeField] private float runningSpeed;
     public float gravity;
+    public float x;
+    public float z;
 
     [Header("STAMINA")]
     [Space(5)]
@@ -26,8 +28,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina;
     [SerializeField] private float minStaminaToRun;
-    [SerializeField] private float staminaDecreaseSpeed;
-    [SerializeField] private float staminaIncreaseSpeed;
+    [SerializeField] private float staminaDecreaseSpeed = 20f;
+    [SerializeField] private float staminaIncreaseSpeed = 20f;
 
 
     [Header("GROUND CHECK")]
@@ -97,10 +99,8 @@ public class PlayerController : NetworkBehaviour
                 ChangePlayerState(PlayerState.Walking);
             }
         }
-        else
-            playerState = PlayerState.Air;
-
-
+        else playerState = PlayerState.Air;
+        
         switch (playerState)
         {
             case PlayerState.Running:
@@ -125,8 +125,9 @@ public class PlayerController : NetworkBehaviour
         {
             velocity.y = -2f;
         }
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        
+        x = Input.GetAxis("Horizontal");
+        z = Input.GetAxis("Vertical");
         
         if (x != 0 || z != 0)
              playerAnim.SetBool("isMoving", true);

@@ -6,8 +6,7 @@ public class PlayerCamera : NetworkBehaviour
 {
     public float mouseSensitivity = 100f;
     public Transform playerTransform;
-
-
+    
     Camera playerCamera;
     float xRotation = 0f;
     public override void OnNetworkSpawn()
@@ -20,7 +19,7 @@ public class PlayerCamera : NetworkBehaviour
         if (!IsOwner)
         {
             playerCamera.enabled = false;
-            GetComponentInChildren<AudioListener>().enabled = false;
+            GetComponent<AudioListener>().enabled = false;
         }
     }
     void Update()
@@ -36,9 +35,10 @@ public class PlayerCamera : NetworkBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerTransform.Rotate(Vector3.up * mouseX);
     }
-
     public void ChangeCameraFov(float newFov)
     {
+        // if (!IsOwner) return;
+
         playerCamera.DOFieldOfView(newFov, 0.1f);
     }
 }

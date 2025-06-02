@@ -3,14 +3,14 @@ using Unity.Netcode;
 using UnityEngine;
 public class HollyWoodLogic : NetworkBehaviour
 {
-    [SerializeField] public RoomSystem roomSystem;
+    [SerializeField] public PlayerRoomIndicator playerRoomIndicator;
     [SerializeField] private ObjectsInHand objectsInHand;
     [SerializeField] public PickUpController pickUpController;
 
     [SerializeField] private DissolveController dissolveController;
     private void OnEnable()
     {
-        roomSystem = FindFirstObjectByType<RoomSystem>();
+        playerRoomIndicator = GetComponent<PlayerRoomIndicator>();
     }
     private void Update()
     {
@@ -21,7 +21,7 @@ public class HollyWoodLogic : NetworkBehaviour
     }
     private void TryInvisibility()
     {
-        if (roomSystem.inRoom.Value)
+        if (playerRoomIndicator.inRoom)
             ProtectionRpc();
         else
             Debug.Log("not in room");

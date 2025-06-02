@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class InGameMenuHandler : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class InGameMenuHandler : MonoBehaviour
 
     public bool isMenuEnabled;
     public bool isOptionsEnabled;
+
+    public TextMeshProUGUI sensText;
+    public TextMeshProUGUI MasterText;
+    public TextMeshProUGUI BGMText;
+    public TextMeshProUGUI SFXText;
     void Start()
     {
         PlayerMenu.DOLocalMove(new Vector3(-850, 0, 0), 1, true).SetEase(curveAnimation);
@@ -69,6 +75,11 @@ public class InGameMenuHandler : MonoBehaviour
         BGMValue = BGMSlider.value;
         playerSensValue = playerSensSlider.value;
 
+        MasterText.text = (MasterValue * 100).ToString("F0");
+        SFXText.text = (SFXValue * 100).ToString("F0");
+        BGMText.text = (BGMValue * 100).ToString("F0");
+        sensText.text = playerSensValue.ToString("F2");
+
         playerPrefs.GetComponent<PlayerPrefs>().masterVolume = masterSlider.value;
         playerPrefs.GetComponent<PlayerPrefs>().bgmVolume = BGMSlider.value;
         playerPrefs.GetComponent<PlayerPrefs>().sfxVolume = SFXSlider.value;
@@ -86,13 +97,13 @@ public class InGameMenuHandler : MonoBehaviour
         isOptionsEnabled = !isOptionsEnabled;
         if (isOptionsEnabled)
         {
-            menu.DOFade(0, 1).SetEase(curveAnimation);
-            options.DOFade(1, 1).SetEase(curveAnimation);
+            menu.DOFade(0, 0.3f).SetEase(curveAnimation);
+            options.DOFade(1, 0.3f).SetEase(curveAnimation);
         }
         else 
         {
-            menu.DOFade(1, 1).SetEase(curveAnimation);
-            options.DOFade(0, 1).SetEase(curveAnimation);
+            menu.DOFade(1, 0.3f).SetEase(curveAnimation);
+            options.DOFade(0, 0.3f).SetEase(curveAnimation);
         }
     }
 }

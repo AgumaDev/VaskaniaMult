@@ -140,7 +140,6 @@ public class PlayerController : NetworkBehaviour
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
-
     void ChangePlayerState(PlayerState newState)
     {
         playerState = newState;

@@ -37,8 +37,6 @@ public class PlayerCamera : NetworkBehaviour
     }
     public void ChangeCameraFov(float newFov)
     {
-        // if (!IsOwner) return;
-
         playerCamera.DOFieldOfView(newFov, 0.1f);
     }
 }

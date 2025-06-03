@@ -17,7 +17,7 @@ public class SessionManager : MonoBehaviour
 {
     public static SessionManager instance;
 
-    ISession activeSession;
+    public ISession activeSession;
     ISession ActiveSession
     {
         get => activeSession;
@@ -30,10 +30,8 @@ public class SessionManager : MonoBehaviour
 
     const string playerNamePropertyKey = "playerName";
     public string PlayerName { get; set; } = "Jugador";
-
     public string CurrentSessionCode { get; private set; }
     public string PlayerId => AuthenticationService.Instance.PlayerId;
-
     public SessionIntent PendingIntent { get; private set; } = SessionIntent.None;
     public string PendingJoinCode { get; private set; }
 

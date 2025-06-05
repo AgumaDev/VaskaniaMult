@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Samples/Vivox/16.6.0/Chat Channel Sample/Assets/ChatChannelSample/Scenes/MainScene.unity
     guid: dbc457e6df4234749aff8bd5ffa028ef
+  - enabled: 1
+    path: Assets/00_Scenes/MainGameTesting.unity
+    guid: 732a68ad6661b7b4889dc958ac973925
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

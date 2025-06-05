@@ -16,7 +16,7 @@ public class PlayerNameDisplay : NetworkBehaviour
         if (IsOwner)
         {
             // Solo el dueño del objeto establece su nombre
-            playerName.Value = SessionManager.Instance.PlayerName;
+            playerName.Value = SessionManager.instance.PlayerName;
         }
 
         playerName.OnValueChanged += (_, newValue) => { nameText.text = newValue.ToString(); };

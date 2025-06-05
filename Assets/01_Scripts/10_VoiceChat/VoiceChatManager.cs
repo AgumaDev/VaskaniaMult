@@ -1,66 +1,77 @@
 using UnityEngine;
-using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Vivox;
 using System.Threading.Tasks;
 
 public class VoiceChatManager : MonoBehaviour
 {
-    #region REFERENCES
-    #endregion
+    public static VoiceChatManager instance;
 
-    #region VARIABLES
-    public string userName;
-    #endregion
+    [SerializeField] private string userName;
+    private GameObject localPlayer;
+    private bool isInChannel = false;
 
-    static VoiceChatManager instance;
-
-    private void Start()
+    private void Awake()
     {
         if (instance != null)
             Destroy(gameObject);
         else instance = this;
         DontDestroyOnLoad(gameObject);
-
-        InitializeAsync();
     }
 
-    async void InitializeAsync()
+    private void Update()
+    {
+        if (isInChannel && localPlayer != null)
+        {
+            VivoxService.Instance.Set3DPosition(localPlayer, SessionManager.instance.activeSession.Id.ToString());
+        }
+    }
+
+    public async Task InitializeAsync()
     {
         await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
         await VivoxService.Instance.InitializeAsync();
         await LoginToVivoxAsync();
     }
 
     public async Task LoginToVivoxAsync()
     {
-        LoginOptions options = new LoginOptions();
-        options.DisplayName = $"{userName}{Random.Range(0, 1000)}";
-        options.EnableTTS = true;
+        userName = SessionManager.instance.PlayerName;
+
+        var options = new LoginOptions
+        {
+            DisplayName = userName,
+            EnableTTS = false
+        };
+
+        Debug.Log($"{options.DisplayName} is logged in!");
         await VivoxService.Instance.LoginAsync(options);
-        //await JoinEchoChannelAsync();
-        await JoinGroupChannelAsync();
     }
 
-    public async Task JoinPositionalGroupChannelAsync()
+    public async Task JoinVoiceChannelAsync()
     {
-        string channelToJoin = SessionManager.instance.activeSession.Id.ToString();
-        await VivoxService.Instance.JoinPositionalChannelAsync(channelToJoin, ChatCapability.AudioOnly, new Channel3DProperties(2, 2, 4f, AudioFadeModel.ExponentialByDistance));
+        if (SessionManager.instance.activeSession != null)
+        {
+            string channelId = SessionManager.instance.activeSession.Id;
+
+            await VivoxService.Instance.JoinPositionalChannelAsync(
+                channelId,
+                ChatCapability.AudioOnly,
+                new Channel3DProperties(30, 10, 2, AudioFadeModel.ExponentialByDistance)
+            );
+
+            isInChannel = true;
+            Debug.Log("Se unió correctamente al canal de voz: " + channelId);
+        }
+        else
+        {
+            Debug.LogError("No se puedo unir al canal de voz: activeSession es null");
+        }
     }
 
-    public async Task JoinEchoChannelAsync()
+    public void SetLocalPlayer(GameObject player)
     {
-        string channelToJoin = "Lobby";
-        await VivoxService.Instance.JoinEchoChannelAsync(channelToJoin, ChatCapability.TextAndAudio);
+        if (localPlayer == null)
+            localPlayer = player;
     }
-
-    public async Task JoinGroupChannelAsync()
-    {
-        string channelToJoin = "MultiLobby";
-        await VivoxService.Instance.JoinGroupChannelAsync(channelToJoin, ChatCapability.AudioOnly);
-    }
-
 }
-
-

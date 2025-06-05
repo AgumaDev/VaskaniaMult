@@ -1,68 +1,76 @@
-using System;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemRecognitionArea : NetworkBehaviour
 {
-    private static ItemRecognitionArea _instance;
-    public static ItemRecognitionArea Instance { get { return _instance; } }
+    public static ItemRecognitionArea instance;
 
     private int coreItemNumber;
-    public NetworkVariable<int> coreItemActivated = new NetworkVariable<int>(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    
+    public NetworkVariable<int> coreItemActivated;
     public TextMeshProUGUI coreItemText;
 
-    public bool candleActivated;
+    public bool candlesActivated = false;
+    private bool candlesHandled = false; // para evitar doble ejecución
 
     public GameObject nunEvent;
-    
+
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-            Destroy(this.gameObject);
-        else 
-            _instance = this;
+        if (instance != null) Destroy(this); else instance = this;
     }
+
     void Update()
     {
-        if(!IsServer)
+        coreItemText.text = coreItemActivated.Value.ToString();
+
+        if (!IsServer)
             return;
-        
-        coreItemText.text = coreItemActivated.ToString();
-        
-        if (candleActivated)
+
+        if (candlesActivated && !candlesHandled)
         {
-            coreItemActivated.Value++;
-            candleActivated = false;
+            CandlesActivated();
+            candlesHandled = true;
         }
 
         if (coreItemActivated.Value == 3)
-        {
             SpawnNunRpc();
-        }
     }
+
     [Rpc(SendTo.Everyone)]
     public void SpawnNunRpc()
     {
         nunEvent.SetActive(true);
     }
+
+    public void CandlesActivated()
+    {
+        Debug.Log("Se activaron todas las velas");
+        coreItemActivated.Value++;
+        candlesActivated = false;
+    }
+
+    public void ResetCandlesFlag()
+    {
+        candlesHandled = false;
+    }
+
     public void DecalCounterUp()
     {
-        if(!IsServer)
+        if (!IsServer)
             return;
-        
+
         coreItemActivated.Value++;
     }
+
     public void DecalCounterDown()
     {
-        if(!IsServer)
+        if (!IsServer)
             return;
-        
+
         coreItemActivated.Value--;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<CoreItem>())
@@ -70,6 +78,7 @@ public class ItemRecognitionArea : NetworkBehaviour
             coreItemNumber++;
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<CoreItem>())

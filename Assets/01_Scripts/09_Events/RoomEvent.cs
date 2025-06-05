@@ -1,22 +1,29 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class RoomEvent : MonoBehaviour
+public class RoomEvent : NetworkBehaviour
 {
     [Header("## ROOM EVENT ##")]
-    [Space(5)]
-
-    [Header("EVENT")]
     public ROOM_EVENT_TYPE roomEvent;
     public GameObject eventGameObjectRef;
+
     public enum ROOM_EVENT_TYPE
     {
         Door,
-        Levitate
+        Levitate,
+        Teleport
     }
 
     public void TriggerEvent()
     {
-        print($"EVENT TRIGGERED: {roomEvent}");
-        eventGameObjectRef.SetActive(true);
+        Debug.Log($"EVENT TRIGGERED: {roomEvent}");
+        TriggerEventClientRpc();
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void TriggerEventClientRpc()
+    {
+        if (eventGameObjectRef != null)
+            eventGameObjectRef.SetActive(true);
     }
 }

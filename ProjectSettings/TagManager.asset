@@ -25,10 +25,7 @@ TagManager:
   - Consumable/Key
   - Consumable/Holy Wood
   - Consumable/Ouija
-  - Menu/Book
-  - Menu/TV
-  - Menu/Candle
-  - PlayerPrefs
+  - Room
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ public class PlayerStartRaycast : NetworkBehaviour
         if (!IsOwner)
             return;
         
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = new Ray(raycastStartPoint.transform.position, playerCameraObject.transform.forward);
             Debug.DrawRay(ray.origin, ray.direction * 3f, Color.green);

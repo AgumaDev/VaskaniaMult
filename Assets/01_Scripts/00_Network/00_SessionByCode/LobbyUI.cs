@@ -8,9 +8,9 @@ public class LobbyUI : MonoBehaviour
 
     void Update()
     {
-        if (!sessionCodeShown && !string.IsNullOrEmpty(SessionManager.Instance?.CurrentSessionCode))
+        if (!sessionCodeShown && !string.IsNullOrEmpty(SessionManager.instance?.CurrentSessionCode))
         {
-            sessionCodeText.text = $"Código: {SessionManager.Instance.CurrentSessionCode}";
+            sessionCodeText.text = $"Código: {SessionManager.instance.CurrentSessionCode}";
             sessionCodeShown = true;
         }
     }

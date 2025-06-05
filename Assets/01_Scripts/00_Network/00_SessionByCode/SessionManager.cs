@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,19 +5,16 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Multiplayer;
 using UnityEngine;
-
 public enum SessionIntent
 {
     None,
     Host,
     Client
 }
-
 public class SessionManager : MonoBehaviour
 {
-    public static SessionManager Instance;
-
-    ISession activeSession;
+    public static SessionManager instance;
+    public ISession activeSession;
     ISession ActiveSession
     {
         get => activeSession;
@@ -28,30 +24,35 @@ public class SessionManager : MonoBehaviour
             Debug.Log($"Active session: {activeSession}");
         }
     }
-
     const string playerNamePropertyKey = "playerName";
-    public string PlayerName { get; set; } = "Jugador";
-
+    
+    string _playerName = "Jugador";
+    public string PlayerName
+    {
+        get => _playerName; set
+        {
+            string cleaned = (value ?? "").Trim().Replace(" ", "");
+            _playerName = string.IsNullOrEmpty(cleaned) ? "Jugador" : cleaned;
+        }
+    }    
     public string CurrentSessionCode { get; private set; }
     public string PlayerId => AuthenticationService.Instance.PlayerId;
-
     public SessionIntent PendingIntent { get; private set; } = SessionIntent.None;
     public string PendingJoinCode { get; private set; }
 
     public Action<Dictionary<string, string>, string, bool> OnPlayerListUpdated;
-
     async void Start()
     {
-        if (Instance != null)
+        if (instance != null)
             Destroy(gameObject);
-        else Instance = this;
-        DontDestroyOnLoad(gameObject);
+        else instance = this;
+            DontDestroyOnLoad(gameObject);
 
         try
         {
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            Debug.Log($"Sign in anonymously succeeded! PlayerID: {AuthenticationService.Instance.PlayerId}");
+            Debug.Log($"Inicio de sesión anonima completa! Jugador ID: {AuthenticationService.Instance.PlayerId}");
         }
         catch (Exception e)
         {
@@ -75,7 +76,7 @@ public class SessionManager : MonoBehaviour
                 { playerNamePropertyKey, new PlayerProperty(PlayerName, VisibilityPropertyOptions.Member) }
             };
 
-            var options = new SessionOptions
+            var options = new SessionOptions()
             {
                 MaxPlayers = 5,
                 IsLocked = false,
@@ -84,16 +85,17 @@ public class SessionManager : MonoBehaviour
             }.WithRelayNetwork();
 
             ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-            Debug.Log($"Session {ActiveSession.Id} created! Join code: {ActiveSession.Code}");
-
             CurrentSessionCode = ActiveSession.Code;
 
+            await VoiceChatManager.instance.InitializeAsync();
+            await VoiceChatManager.instance.JoinVoiceChannelAsync();
+            
             MonitorSessionPlayers();
             return true;
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to create session: {e}");
+            Debug.LogError($"No se pudo crear una sesión: {e}");
             return false;
         }
     }
@@ -105,15 +107,17 @@ public class SessionManager : MonoBehaviour
             await AuthenticationService.Instance.UpdatePlayerNameAsync(PlayerName);
 
             ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(sessionCode);
-            Debug.Log($"Joined session {ActiveSession.Id}");
-
             CurrentSessionCode = ActiveSession.Code;
+
+            await VoiceChatManager.instance.InitializeAsync();
+            await VoiceChatManager.instance.JoinVoiceChannelAsync();
+            
             MonitorSessionPlayers();
             return true;
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to join session: {e}");
+            Debug.LogError($"No se pudo crear una sesión: {e}");
             return false;
         }
     }
@@ -128,32 +132,13 @@ public class SessionManager : MonoBehaviour
             foreach (var p in players)
             {
                 if (p.Properties.TryGetValue(playerNamePropertyKey, out var prop))
-                    dict[p.Id] = prop.Value.ToString();
+                    dict[p.Id] = prop.Value;
                 else
                     dict[p.Id] = "Desconocido";
             }
 
             OnPlayerListUpdated?.Invoke(dict, PlayerId, ActiveSession.IsHost);
             await Task.Delay(1000);
-        }
-    }
-
-    public async void LeaveSession()
-    {
-        if (ActiveSession != null)
-        {
-            try
-            {
-                await ActiveSession.AsHost().LeaveAsync();
-            }
-            catch
-            {
-                // Ignored
-            }
-            finally
-            {
-                ActiveSession = null;
-            }
         }
     }
 }

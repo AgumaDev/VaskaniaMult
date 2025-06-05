@@ -21,16 +21,21 @@ public class PickUpController : NetworkBehaviour
     [SerializeField] private OuijaLogic ouijaLogic;
     [SerializeField] private ProtectionLogic crossLogic;
     [SerializeField] private ProtectionLogic rosaryLogic;
-    [FormerlySerializedAs("paloSantoLogic")] [SerializeField] private HollyWoodLogic hollyWoodLogic;
+    [SerializeField] private HollyWoodLogic hollyWoodLogic;
     [SerializeField] private IncenseLogic incenseLogic;
     [SerializeField] private KeysLogic keysLogic;
-    [SerializeField] private EncendedorLogic encendedorLogic;
-    [FormerlySerializedAs("cenizasLogic")] [SerializeField] private AshesLogic ashesLogic;
+    [SerializeField] private LighterLogic lighterLogic;
+    [SerializeField] private AshesLogic ashesLogic;
     public PlayerHealth playerHealth;
 
     [SerializeField] private ObjectsInHand objectsInHand;
     [SerializeField] public bool isProtected;
 
+    private GameObject raycastHitObject;
+    private bool raycastHit;
+    private RaycastHit lastRaycastHit;
+    private bool hasHit;
+    
     private Dictionary<string, System.Action> pickUpActions;
     private Dictionary<string, System.Action> dropActions;
 
@@ -41,13 +46,13 @@ public class PickUpController : NetworkBehaviour
             { "Core/Chalice Wine", () => { objectsInHand.chaliceWine.enabled = true; objectsInHand.wineLiquid.enabled = true; } },
             { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = true; } },
             { "Core/Incense", () => { objectsInHand.incense.enabled = true; incenseLogic.enabled = true; incenseLogic.vfxSmoke.gameObject.SetActive(true); } },
-            { "Core/Lighter", () => { objectsInHand.lighter.enabled = true; encendedorLogic.enabled = true; } },
+            { "Core/Lighter", () => { objectsInHand.lighter.enabled = true; lighterLogic.enabled = true; } },
             { "Core/Ashes", () => { objectsInHand.ashes.enabled = true; ashesLogic.enabled = true; } },
             { "Core/Bell", () => { objectsInHand.bell.enabled = true; } },
             { "Core/Frame Painting", () => { objectsInHand.paintingFrame.enabled = true; } },
             { "Core/Pennant", () => { objectsInHand.pennant.enabled = true; } },
             { "Core/Salt", () => { objectsInHand.salt.enabled = true; } },
-            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = true; objectsInHand.waterLiquid.enabled = true; objectsInHand.corcho.enabled = true; } },
+            { "Core/Holy Water", () => {  } },
             { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = true; hollyWoodLogic.enabled = true; } },
             { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = true; oilLampLogic.enabled = true; } },
             { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = true; ouijaLogic.enabled = true; } },
@@ -58,11 +63,11 @@ public class PickUpController : NetworkBehaviour
 
         dropActions = new Dictionary<string, System.Action>
         {
-            { "Core/Lighter", () => { objectsInHand.lighter.enabled = false; encendedorLogic.enabled = false;
+            { "Core/Lighter", () => { objectsInHand.lighter.enabled = false; lighterLogic.enabled = false;
                 if (!pickedObject)
                 {
-                    encendedorLogic.pointLight.SetActive(false);
-                    encendedorLogic.isLighted = false;
+                    lighterLogic.pointLight.SetActive(false);
+                    lighterLogic.isLighted = false;
                 }
             }},
             { "Core/Ashes", () => { objectsInHand.ashes.enabled = false; ashesLogic.enabled = false; } },
@@ -76,7 +81,7 @@ public class PickUpController : NetworkBehaviour
             { "Core/Frame Painting", () => { objectsInHand.paintingFrame.enabled = false; } },
             { "Core/Pennant", () => { objectsInHand.pennant.enabled = false; } },
             { "Core/Salt", () => { objectsInHand.salt.enabled = false; } },
-            { "Core/Holy Water", () => { objectsInHand.holyWater.enabled = false; objectsInHand.waterLiquid.enabled = false; objectsInHand.corcho.enabled = false; } },
+            { "Core/Holy Water", () => { } },
             { "Core/Chalice Wine", () => { objectsInHand.chaliceWine.enabled = false; objectsInHand.wineLiquid.enabled = false; } },
             { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = false; } },
             { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = false; hollyWoodLogic.enabled = false; } },
@@ -91,26 +96,53 @@ public class PickUpController : NetworkBehaviour
             { "Consumable/Cross", () => { objectsInHand.cross.enabled = false; crossLogic.enabled = false; isProtected = false; }},
             { "Consumable/Rosary", () => { objectsInHand.rosary.enabled = false; rosaryLogic.enabled = false; isProtected = false; }} };
     }
-
     void Update()
     {
         if (!IsOwner) return;
 
+        Ray ray = new Ray(raycastStartPoint.transform.position, playerCameraObject.transform.forward);
+        Debug.DrawRay(ray.origin, ray.direction * 3f, Color.green);
+
+        hasHit = Physics.Raycast(ray, out lastRaycastHit, 3f, pickUpLayer);
+
+        SetRaycast(lastRaycastHit, hasHit);
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (!pickedObject)
-                TryPickUp();
+                TryPickUp(lastRaycastHit, hasHit);
             else
                 DropObject();
         }
     }
 
-    private void TryPickUp()
+    private void SetRaycast(RaycastHit hit, bool isHit)
     {
-        Ray ray = new Ray(raycastStartPoint.transform.position, playerCameraObject.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * 3f, Color.green);
+        if (isHit)
+        {
+            if (!raycastHit || hit.collider.gameObject != raycastHitObject)
+            {
+                if (raycastHitObject != null)
+                    raycastHitObject.GetComponent<MeshRenderer>().materials[1].SetFloat("_Outile_Thickness", 0f);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f, pickUpLayer))
+                raycastHitObject = hit.collider.gameObject;
+                raycastHitObject.GetComponent<MeshRenderer>().materials[1].SetFloat("_Outile_Thickness", 0.01f);
+                raycastHit = true;
+            }
+        }
+        else
+        {
+            if (raycastHit && raycastHitObject != null)
+            {
+                raycastHitObject.GetComponent<MeshRenderer>().materials[1].SetFloat("_Outile_Thickness", 0f);
+                raycastHitObject = null;
+                raycastHit = false;
+            }
+        }
+    }
+    private void TryPickUp(RaycastHit hit, bool isHit)
+    {
+        if (isHit)
         {
             NetworkObject netObj = hit.collider.GetComponent<NetworkObject>();
             if (netObj != null)

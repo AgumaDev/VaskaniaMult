@@ -16038,9 +16038,8 @@ MonoBehaviour:
   - {fileID: 3691735532149278360, guid: fe3bafb7fbac10c49ae1f3a75620f6f3, type: 3}
   - {fileID: 441959129084790725, guid: 21000a6de41c42f49b547a6f00232c87, type: 3}
   - {fileID: 5879923977905819433, guid: 4a7364691ab227743a5d3eac3932312c, type: 3}
-  - {fileID: 4687117840607183975, guid: d7d1f6d5f94521c44a2790642d7100b3, type: 3}
+  - {fileID: 292411367228007175, guid: d7d1f6d5f94521c44a2790642d7100b3, type: 3}
   - {fileID: 5857187091603968748, guid: 5e529e44bf243d049ba15a960c290327, type: 3}
-  - {fileID: 3124711956704926076, guid: 69ac7bb873f7a0048aa237f0a82a61e5, type: 3}
   - {fileID: 7257476370072548322, guid: 28c27c58ce47ebe4fbbfd9577b1a9311, type: 3}
   - {fileID: 8252818457245506782, guid: 7697fbe70d4539e49a2d0da2fc533fa7, type: 3}
   - {fileID: 9001908145912546716, guid: 9fe93a61d56a5f44997e4d1a017c2115, type: 3}
@@ -16050,7 +16049,7 @@ MonoBehaviour:
   - {fileID: 359349108}
   - {fileID: 1845144587}
   maxItemCount: 5
-  coreItemCount: 10
+  coreItemCount: 9
   selectedCoreItems: []
 --- !u!108 &958453887396439793
 Light:

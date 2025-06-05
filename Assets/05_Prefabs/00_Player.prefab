@@ -1528,7 +1528,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462615050581464251}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1544,7 +1544,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e1d2e795d7dce9e409e595de15487519, type: 2}
+  - {fileID: 2100000, guid: a8cd353a24488824380f3193a6e2d1d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2385,8 +2385,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1e1ac8447a06ef042bd9b39c7e7d2fe9, type: 2}
-  - {fileID: 2100000, guid: 661d01e8a1e05704a81076f82d01d8ee, type: 2}
+  - {fileID: -4015999019191652746, guid: 53d694946109728489388fc88bf0323e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2440,94 +2439,6 @@ Transform:
   - {fileID: 8115363439437788471}
   m_Father: {fileID: 1505599179134905669}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3341558013432616760
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7025637205422235032}
-  - component: {fileID: 5706828774508334913}
-  - component: {fileID: 3131016947145743032}
-  m_Layer: 0
-  m_Name: AguaBenditaFrasco
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7025637205422235032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3341558013432616760}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.00013329217, y: 0.12502857, z: 0.0076314257}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6892701627937920650}
-  - {fileID: 6091721967432387633}
-  m_Father: {fileID: 8665284393798255523}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5706828774508334913
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3341558013432616760}
-  m_Mesh: {fileID: -5712209475675292322, guid: e5815508200d487429d765344a3e3586, type: 3}
---- !u!23 &3131016947145743032
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3341558013432616760}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: e1d2e795d7dce9e409e595de15487519, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3432539652495866343
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,7 +3010,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   anim: {fileID: 4254382906548758335}
   pickUpController: {fileID: 6121339947075906749}
-  dissolveController: {fileID: 0}
+  dissolveController: {fileID: 3102553703701210017}
   objectsInHand:
     chaliceOstia: {fileID: 0}
     chaliceWine: {fileID: 0}
@@ -3113,9 +3024,6 @@ MonoBehaviour:
     incense: {fileID: 0}
     key: {fileID: 0}
     salt: {fileID: 0}
-    holyWater: {fileID: 0}
-    waterLiquid: {fileID: 0}
-    corcho: {fileID: 0}
     pennant: {fileID: 0}
     bell: {fileID: 0}
     paintingFrame: {fileID: 0}
@@ -3185,38 +3093,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 2e172eac1dfc0b34aaee5230ffdf7a85, type: 2}
---- !u!1 &4308254689909572359
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8665284393798255523}
-  m_Layer: 0
-  m_Name: Holly Water
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8665284393798255523
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4308254689909572359}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.283, y: -0.271, z: -0.94518197}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7025637205422235032}
-  m_Father: {fileID: 4728196585813604274}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4321044829456738091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3649,7 +3525,6 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be12767eebf50a1488de8f2c3b038757, type: 2}
   - {fileID: 2100000, guid: ed0d61e7472477e40860934da445d1f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -3721,9 +3596,6 @@ MonoBehaviour:
     incense: {fileID: 0}
     key: {fileID: 0}
     salt: {fileID: 0}
-    holyWater: {fileID: 0}
-    waterLiquid: {fileID: 0}
-    corcho: {fileID: 0}
     pennant: {fileID: 0}
     bell: {fileID: 0}
     paintingFrame: {fileID: 0}
@@ -3810,92 +3682,6 @@ Transform:
   - {fileID: 7712847643181456276}
   m_Father: {fileID: 4707248388993277015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4820406044049636571
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6892701627937920650}
-  - component: {fileID: 7303222011883857517}
-  - component: {fileID: 2863284541794318117}
-  m_Layer: 0
-  m_Name: Corcho
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6892701627937920650
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4820406044049636571}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0011307144}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7025637205422235032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7303222011883857517
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4820406044049636571}
-  m_Mesh: {fileID: 4634199520507864910, guid: e5815508200d487429d765344a3e3586, type: 3}
---- !u!23 &2863284541794318117
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4820406044049636571}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: ac6b81523d3f513489e4b9d96bcec187, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4860025678577661082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,8 +3989,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bdfbb8412b37317489d5b08c7b074276, type: 2}
-  - {fileID: 2100000, guid: 1ab0ed1c7b589fd49942a077156beb35, type: 2}
+  - {fileID: 2100000, guid: cbb5624926f3b7f44a18d2a0ae7985e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4422,8 +4207,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 661d01e8a1e05704a81076f82d01d8ee, type: 2}
-  - {fileID: 2100000, guid: d2a9d057d7329ba44a8b5a274fa6c082, type: 2}
+  - {fileID: 2100000, guid: 57d7c6ec36e47a54fbb263ba39146e1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5483,9 +5267,6 @@ MonoBehaviour:
     incense: {fileID: 0}
     key: {fileID: 7240733306627876543}
     salt: {fileID: 0}
-    holyWater: {fileID: 0}
-    waterLiquid: {fileID: 0}
-    corcho: {fileID: 0}
     pennant: {fileID: 0}
     bell: {fileID: 0}
     paintingFrame: {fileID: 0}
@@ -5556,8 +5337,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72568091f8be4a64bb45930dd66ff72c, type: 2}
-  - {fileID: 5882275423722210378, guid: 69eecaf2fa3012941ae1be3c0f3814ed, type: 3}
+  - {fileID: 2100000, guid: bdfbb8412b37317489d5b08c7b074276, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5914,7 +5694,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7052605286067565518}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6213,92 +5993,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7604209963233408292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7198075488525513818
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6091721967432387633}
-  - component: {fileID: 7349517557249716998}
-  - component: {fileID: 7202636669478243944}
-  m_Layer: 0
-  m_Name: Agua
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6091721967432387633
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7198075488525513818}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00048352042}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7025637205422235032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7349517557249716998
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7198075488525513818}
-  m_Mesh: {fileID: -3702924943875223191, guid: e5815508200d487429d765344a3e3586, type: 3}
---- !u!23 &7202636669478243944
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7198075488525513818}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 8149a4fb11f521a4691f8c0885d3baad, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7289285761416544762
 GameObject:
   m_ObjectHideFlags: 0
@@ -6683,7 +6377,6 @@ Transform:
   - {fileID: 530256788290614534}
   - {fileID: 8081712551498107732}
   - {fileID: 1403834733729905426}
-  - {fileID: 8665284393798255523}
   - {fileID: 2126211475992516740}
   - {fileID: 8070047437742987138}
   - {fileID: 1018629996256432249}
@@ -7176,7 +6869,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 614a9a813a2ec0842be6827b71ba07f1, type: 2}
-  - {fileID: 2100000, guid: 696b8ee33d385cc43918593cdecc47e5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7249,9 +6941,6 @@ MonoBehaviour:
     incense: {fileID: 0}
     key: {fileID: 0}
     salt: {fileID: 0}
-    holyWater: {fileID: 0}
-    waterLiquid: {fileID: 0}
-    corcho: {fileID: 0}
     pennant: {fileID: 0}
     bell: {fileID: 0}
     paintingFrame: {fileID: 0}
@@ -7904,8 +7593,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72568091f8be4a64bb45930dd66ff72c, type: 2}
-  - {fileID: 5882275423722210378, guid: 6e541609748527b46b1deed54ed5b072, type: 3}
+  - {fileID: 2100000, guid: bdfbb8412b37317489d5b08c7b074276, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8264,7 +7952,6 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72568091f8be4a64bb45930dd66ff72c, type: 2}
   - {fileID: 2100000, guid: ae8c666de18f1d9459ad5538ad331bd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -8667,7 +8354,7 @@ MonoBehaviour:
   hollyWoodLogic: {fileID: 1180702744410830030}
   incenseLogic: {fileID: 4460930882526737316}
   keysLogic: {fileID: 4136895825480585192}
-  encendedorLogic: {fileID: 2798719099368794175}
+  lighterLogic: {fileID: 2798719099368794175}
   ashesLogic: {fileID: 5650421764886209748}
   playerHealth: {fileID: 7518444185040659105}
   objectsInHand:
@@ -8683,9 +8370,6 @@ MonoBehaviour:
     incense: {fileID: 1528793440673650450}
     key: {fileID: 7240733306627876543}
     salt: {fileID: 3897537045256819134}
-    holyWater: {fileID: 3131016947145743032}
-    waterLiquid: {fileID: 7202636669478243944}
-    corcho: {fileID: 2863284541794318117}
     pennant: {fileID: 5667648528995100218}
     bell: {fileID: 149987809747520636}
     paintingFrame: {fileID: 8912433398788402552}

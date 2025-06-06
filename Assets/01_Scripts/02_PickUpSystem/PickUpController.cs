@@ -86,12 +86,7 @@ public class PickUpController : NetworkBehaviour
             { "Core/Chalice Ostia", () => { objectsInHand.chaliceOstia.enabled = false; } },
             { "Consumable/Holy Wood", () => { objectsInHand.holyWood.enabled = false; hollyWoodLogic.enabled = false; } },
             { "Consumable/Key", () => { objectsInHand.key.enabled = false; keysLogic.enabled = false; } },
-            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = false; oilLampLogic.enabled = false;
-                if (!pickedObject)
-                {
-                    oilLampLogic.pointLight1.SetActive(false);
-                    oilLampLogic.pointLight2.SetActive(false);
-                } }},
+            { "Consumable/Oil Lamp", () => { objectsInHand.oilLamp.enabled = false; oilLampLogic.enabled = false; if (!pickedObject) oilLampLogic.pointLight.SetActive(false); }},
             { "Consumable/Ouija", () => { objectsInHand.ouija.enabled = false; ouijaLogic.enabled = false; } },
             { "Consumable/Cross", () => { objectsInHand.cross.enabled = false; crossLogic.enabled = false; isProtected = false; }},
             { "Consumable/Rosary", () => { objectsInHand.rosary.enabled = false; rosaryLogic.enabled = false; isProtected = false; }} };

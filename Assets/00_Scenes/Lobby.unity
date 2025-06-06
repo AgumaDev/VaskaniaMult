@@ -2956,7 +2956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.87058824}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -29850,7 +29850,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1428a2b0027ba564eba3d2a2d4567b09, type: 2}
+  - {fileID: 2100000, guid: 696b8ee33d385cc43918593cdecc47e5, type: 2}
   - {fileID: 2100000, guid: b314e5dbf167334459a17960bfa461ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 public class PlayerCamera : NetworkBehaviour
 {
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity;
     public Transform playerTransform;
     
     Camera playerCamera;

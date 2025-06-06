@@ -12,7 +12,8 @@ public class PlayerController : NetworkBehaviour
     {
         Air,
         Walking,
-        Running
+        Running,
+        Menu
     }
 
     public Vector3 velocity;
@@ -52,7 +53,10 @@ public class PlayerController : NetworkBehaviour
 
     public bool insideMainArea;
     [SerializeField] private Animator playerAnim;
-    
+
+    public GameObject UIMenu;
+
+    public bool isMenuOpened;
     
     float baseSpeed;
 
@@ -74,25 +78,37 @@ public class PlayerController : NetworkBehaviour
             CullingLayer(playerModel, localLayer);
         }
 
+        UIMenu = GameObject.FindGameObjectWithTag("Menu/InGameMenu");
         stamina = maxStamina;
+        GameObject.FindGameObjectWithTag("Menu/InGameMenu").GetComponent<InGameMenuHandler>().LookForPlayers();
     }
     private void Update()
     {
         if (!IsOwner) return;
-        Movement(); 
+        Movement();
+
+        if (UIMenu.GetComponent<InGameMenuHandler>().isMenuEnabled)
+        {
+            ChangePlayerState(PlayerState.Menu);
+            isMenuOpened = true;
+        }
+        else
+        {
+            isMenuOpened = false;
+        }
     }
     private void Movement()
     {
         //CHANGING STATE
 
-        if ( isGrounded && Input.GetKey(KeyCode.LeftShift))
+        if ( isGrounded && Input.GetKey(KeyCode.LeftShift) && isMenuOpened == false)
         {
             if(playerState != PlayerState.Running && stamina >= minStaminaToRun) 
             {
                 ChangePlayerState(PlayerState.Running);
             }
         }
-        else if (isGrounded)
+        else if (isGrounded && isMenuOpened == false)
         {
             if(playerState != PlayerState.Walking)
             {
@@ -154,6 +170,9 @@ public class PlayerController : NetworkBehaviour
             case PlayerState.Running:
                 baseSpeed = runningSpeed;
                 playerCam.ChangeCameraFov(70);
+                break;
+            case PlayerState.Menu:
+                baseSpeed = 0;
                 break;
         }
     }

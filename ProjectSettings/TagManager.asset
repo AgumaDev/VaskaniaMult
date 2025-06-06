@@ -28,6 +28,8 @@ TagManager:
   - Menu/Book
   - PlayerPrefs
   - Menu/TV
+  - Room
+  - Menu/InGameMenu
   layers:
   - Default
   - TransparentFX

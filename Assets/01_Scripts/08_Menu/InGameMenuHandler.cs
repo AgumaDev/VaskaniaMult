@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -32,6 +33,10 @@ public class InGameMenuHandler : MonoBehaviour
     public TextMeshProUGUI MasterText;
     public TextMeshProUGUI BGMText;
     public TextMeshProUGUI SFXText;
+
+    public List<GameObject> playerList = new List<GameObject>();
+
+    public bool hasMoveMenu;
     void Start()
     {
         PlayerMenu.DOLocalMove(new Vector3(-850, 0, 0), 1, true).SetEase(curveAnimation);
@@ -47,6 +52,8 @@ public class InGameMenuHandler : MonoBehaviour
         SFXSlider.value = playerPrefs.GetComponent<PlayerPrefs>().sfxVolume;
         BGMSlider.value = playerPrefs.GetComponent<PlayerPrefs>().bgmVolume;
         playerSensSlider.value = playerPrefs.GetComponent<PlayerPrefs>().mouseSensitivity;
+
+        
     }
 
     // Update is called once per frame
@@ -55,19 +62,7 @@ public class InGameMenuHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isMenuEnabled = !isMenuEnabled;
-            if (isMenuEnabled)
-            {
-                PlayerMenu.DOLocalMove(new Vector3(0, 0, 0), 0.5f, true).SetEase(curveAnimation);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                PlayerMenu.DOLocalMove(new Vector3(-850, 0, 0), 0.5f, true).SetEase(curveAnimation);
-
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            hasMoveMenu = true;
         }
 
         MasterValue = masterSlider.value;
@@ -84,12 +79,46 @@ public class InGameMenuHandler : MonoBehaviour
         playerPrefs.GetComponent<PlayerPrefs>().bgmVolume = BGMSlider.value;
         playerPrefs.GetComponent<PlayerPrefs>().sfxVolume = SFXSlider.value;
         playerPrefs.GetComponent<PlayerPrefs>().mouseSensitivity = playerSensSlider.value;
+
+        if (isMenuEnabled)
+        {
+            if (hasMoveMenu)
+            {
+              PlayerMenu.DOLocalMove(new Vector3(0, 0, 0), 0.5f, true).SetEase(curveAnimation);
+                
+            }
+            playerList[0].GetComponentInChildren<PlayerCamera>().mouseSensitivity = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            hasMoveMenu = false;
+        }
+        else
+        {
+            if (hasMoveMenu)
+            {
+                PlayerMenu.DOLocalMove(new Vector3(-850, 0, 0), 0.5f, true).SetEase(curveAnimation);
+                
+            }
+            playerList[0].GetComponentInChildren<PlayerCamera>().mouseSensitivity = playerSensValue;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            hasMoveMenu = false;
+        }
+
+       
+    }
+
+    public void LookForPlayers()
+    {
+        playerList.Clear();
+        playerList.AddRange(GameObject.FindGameObjectsWithTag("Player"));
     }
 
     public void ContinueButton()
     {
-        isMenuEnabled = !isMenuEnabled;
+        hasMoveMenu = true;
         isOptionsEnabled = false;
+        isMenuEnabled = !isMenuEnabled;
     }
 
     public void OptionsButton()

@@ -8186,10 +8186,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1783393147}
   m_HandleRect: {fileID: 596426572}
   m_Direction: 0
-  m_MinValue: 0.01
-  m_MaxValue: 1
+  m_MinValue: 20
+  m_MaxValue: 500
   m_WholeNumbers: 0
-  m_Value: 0.01
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -49279,7 +49279,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72568091f8be4a64bb45930dd66ff72c, type: 2}
+  - {fileID: 2100000, guid: 9f6b07559a9853748a59d88dcbcdb706, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
